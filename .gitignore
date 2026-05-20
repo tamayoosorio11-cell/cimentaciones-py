@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+.env
+
+# Node
+app/frontend/node_modules/
+app/frontend/.next/
+app/frontend/out/
+
+# Env files (keep .env.example but not real .env)
+.env
+.env.local
+.env.production.local
+app/frontend/.env.local
+app/frontend/.env.production.local
+# Explicitly allow examples
+!.env.example
+!app/frontend/.env.example
+
+# Excel temp files
+~$*.xlsm
+~$*.xlsx
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Temp
+C:/Temp/

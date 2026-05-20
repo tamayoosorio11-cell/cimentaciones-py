@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+* { box-sizing: border-box; }
+
+:root {
+  --bg:        #f0f2f5;
+  --surface:   #ffffff;
+  --sidebar:   #1b2a3b;
+  --sidebar-h: #243447;
+  --accent:    #0057b8;
+  --accent-h:  #0046a0;
+  --border:    #d0d5dd;
+  --text:      #1a1d23;
+  --muted:     #6b7280;
+  --success:   #16a34a;
+  --danger:    #dc2626;
+  --warning:   #d97706;
+  --mono:      "Consolas", "Courier New", monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* scrollbar estilo ingeniería */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #e5e7eb; }
+::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+/* Números siempre monospace */
+.num { font-family: var(--mono); }
+
+/* Tablas estilo ingeniería */
+.eng-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.eng-table th {
+  background: #e8edf3;
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  color: #374151;
+  white-space: nowrap;
+}
+.eng-table td {
+  border: 1px solid #e5e7eb;
+  padding: 3px 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+.eng-table tbody tr:hover { background: #f0f4f8; }
+.eng-table tbody tr:nth-child(even) { background: #f8fafc; }
+
+/* Status pill */
+.pill-ok   { background:#dcfce7; color:#15803d; border:1px solid #86efac; }
+.pill-fail { background:#fee2e2; color:#b91c1c; border:1px solid #fca5a5; }
+.pill-warn { background:#fef3c7; color:#b45309; border:1px solid #fcd34d; }
