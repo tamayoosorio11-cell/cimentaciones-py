@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: cimentaciones-api
+    env: python
+    plan: free
+    rootDir: app/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://cimentaciones-py.vercel.app
+      - key: PYTHON_VERSION
+        value: 3.11.0
