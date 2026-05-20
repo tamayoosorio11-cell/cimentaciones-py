@@ -13,42 +13,59 @@ import { TerzaghiChart } from "@/components/results/TerzaghiChart";
 import { PlantaViz } from "@/components/results/PlantaViz";
 import {
   Calculator, BarChart2, AlertTriangle,
-  BookOpen, Settings, Save, LogOut, Download, Upload,
+  BookOpen, Settings, Save, LogOut, Download,
   RefreshCw, ChevronRight, Activity, Grid,
-  Database, TrendingDown, Zap,
+  Database, TrendingDown,
 } from "lucide-react";
 
-// ── Tipos ──────────────────────────────────────────────────────────────────
+// ── Paleta ──────────────────────────────────────────────────────────────────
+const C = {
+  navy:      "#1a2744",
+  navyMid:   "#243360",
+  navyLight: "#2e4080",
+  gold:      "#f0c040",
+  goldH:     "#d4a820",
+  goldSoft:  "#fdf3c0",
+  bg:        "#dce6f0",
+  surface:   "#eef2f8",
+  surface2:  "#f8fafc",
+  border:    "#b0c4d8",
+  borderH:   "#7a9abf",
+  text:      "#1a2744",
+  textInv:   "#ffffff",
+  muted:     "#5a6e84",
+  success:   "#16a34a",
+  danger:    "#dc2626",
+  warning:   "#b45309",
+} as const;
 
+// ── Tipografía ───────────────────────────────────────────────────────────────
+const FONT_UI   = `"Inter", "Segoe UI", Arial, sans-serif`;
+const FONT_COND = `"Barlow Condensed", "Arial Narrow", sans-serif`;
+const FONT_MONO = `"IBM Plex Mono", "Consolas", monospace`;
+
+// ── Nav ──────────────────────────────────────────────────────────────────────
 type ModuleId =
   | "entrada" | "parametros" | "sondeos"
   | "m4" | "m5" | "m8" | "diferencial" | "planta" | "terzaghi";
 
 interface NavItem {
-  id: ModuleId;
-  label: string;
-  short: string;
-  icon: React.ElementType;
-  group: string;
-  needsResult?: boolean;
+  id: ModuleId; label: string; short: string;
+  icon: React.ElementType; group: string; needsResult?: boolean;
 }
 
 const NAV: NavItem[] = [
-  // Entrada
-  { id: "parametros", label: "Parámetros del proyecto", short: "M1", icon: Settings,    group: "ENTRADA", needsResult: false },
-  { id: "sondeos",    label: "Perfil estratigráfico",   short: "M2", icon: Database,    group: "ENTRADA", needsResult: false },
-  // Cálculo
-  { id: "m4",         label: "Capacidad de carga",      short: "M4", icon: Calculator,  group: "CÁLCULO", needsResult: true },
-  { id: "m5",         label: "Distribución Boussinesq", short: "M5", icon: BarChart2,   group: "CÁLCULO", needsResult: true },
-  { id: "m8",         label: "Asentamientos totales",   short: "M8", icon: TrendingDown,group: "CÁLCULO", needsResult: true },
-  { id: "diferencial",label: "Distorsión angular β",    short: "β",  icon: AlertTriangle,group:"CÁLCULO", needsResult: true },
-  // Visualización
-  { id: "planta",     label: "Planta de cimentación",   short: "2D", icon: Grid,        group: "VISUALIZ.", needsResult: true },
-  { id: "terzaghi",   label: "Terzaghi vs Meyerhof",   short: "T/M",icon: BookOpen,    group: "ANÁLISIS",  needsResult: true },
+  { id:"parametros",  label:"Parámetros del proyecto",  short:"M1", icon:Settings,     group:"ENTRADA",    needsResult:false },
+  { id:"sondeos",     label:"Perfil estratigráfico",    short:"M2", icon:Database,     group:"ENTRADA",    needsResult:false },
+  { id:"m4",          label:"Capacidad de carga",       short:"M4", icon:Calculator,   group:"CÁLCULO",    needsResult:true  },
+  { id:"m5",          label:"Distribución Boussinesq",  short:"M5", icon:BarChart2,    group:"CÁLCULO",    needsResult:true  },
+  { id:"m8",          label:"Asentamientos totales",    short:"M8", icon:TrendingDown, group:"CÁLCULO",    needsResult:true  },
+  { id:"diferencial", label:"Distorsión angular β",     short:"β",  icon:AlertTriangle,group:"CÁLCULO",    needsResult:true  },
+  { id:"planta",      label:"Planta de cimentación",    short:"2D", icon:Grid,         group:"VISUALIZ.",  needsResult:true  },
+  { id:"terzaghi",    label:"Terzaghi vs Meyerhof",     short:"T/M",icon:BookOpen,     group:"ANÁLISIS",   needsResult:true  },
 ];
 
-// ── Componente principal ───────────────────────────────────────────────────
-
+// ── App ───────────────────────────────────────────────────────────────────────
 export default function App() {
   const {
     proyecto, resultado, calculando, error, proyectoActivoId,
@@ -57,129 +74,160 @@ export default function App() {
   } = useStore();
   const [activeModule, setActiveModule] = useState<ModuleId>("parametros");
 
-  // ── Sin proyecto activo → pantalla de inicio ──────────────────────────
   if (!proyectoActivoId) return <ProjectHome />;
 
-  // ── Exportar JSON ─────────────────────────────────────────────────────
   const handleExportar = () => {
-    const blob = new Blob([JSON.stringify(proyecto, null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(proyecto, null, 2)], { type:"application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `${proyecto.nombre.replace(/\s+/g, "_")}.json`;
+    a.download = `${proyecto.nombre.replace(/\s+/g,"_")}.json`;
     a.click();
   };
 
   const handleCalc = async () => {
-    setCalculando(true);
-    setError(null);
+    setCalculando(true); setError(null);
     try {
       const r = await calcular(proyecto);
-      setResultado(r);
-      setActiveModule("m4");
+      setResultado(r); setActiveModule("m4");
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Error de cálculo");
-    } finally {
-      setCalculando(false);
-    }
+    } finally { setCalculando(false); }
   };
 
-  // Indicadores de estado
-  const cumpleMeyerhof    = resultado ? resultado.meyerhof.every(r => r.cumple) : null;
-  const cumpleAsentam     = resultado ? Object.values(resultado.S_total).every(s => s <= 25) : null;
-  const cumpleDif         = resultado ? resultado.diferencial.every(r => r.cumple) : null;
-  const todoOK            = cumpleMeyerhof && cumpleAsentam && cumpleDif;
-
-  // Grupos de navegación
+  const cumpleMeyerhof = resultado ? resultado.meyerhof.every(r => r.cumple) : null;
+  const cumpleAsentam  = resultado ? Object.values(resultado.S_total).every(s => s <= 25) : null;
+  const cumpleDif      = resultado ? resultado.diferencial.every(r => r.cumple) : null;
+  const todoOK         = cumpleMeyerhof && cumpleAsentam && cumpleDif;
   const groups = [...new Set(NAV.map(n => n.group))];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh", overflow: "hidden" }}>
+    <div style={{ display:"flex", flexDirection:"column", height:"100vh", overflow:"hidden", fontFamily:FONT_UI }}>
 
-      {/* ══ TOOLBAR SUPERIOR ══════════════════════════════════════════════ */}
+      {/* ══ TOOLBAR ═══════════════════════════════════════════════════════════ */}
       <div style={{
-        background: "#1b2a3b",
-        borderBottom: "2px solid #0057b8",
-        display: "flex", alignItems: "center",
-        padding: "0 16px", height: "42px", flexShrink: 0,
-        gap: "12px",
+        background: C.navy,
+        borderBottom: `3px solid ${C.gold}`,
+        display:"flex", alignItems:"center",
+        padding:"0 14px", height:46, flexShrink:0, gap:10,
       }}>
-        {/* Logo */}
-        <div style={{ display:"flex", alignItems:"center", gap:8, marginRight:16 }}>
+
+        {/* Logo Universidad */}
+        <div style={{ display:"flex", alignItems:"center", gap:10, marginRight:8 }}>
           <div style={{
-            width:24, height:24, background:"#0057b8",
-            borderRadius:4, display:"flex", alignItems:"center", justifyContent:"center"
+            width:32, height:32,
+            borderRadius:"50%",
+            border: `2.5px solid ${C.gold}`,
+            background: C.navy,
+            display:"flex", alignItems:"center", justifyContent:"center",
+            flexShrink:0,
           }}>
-            <Zap size={14} color="white"/>
+            <span style={{
+              color: C.gold, fontFamily: FONT_COND,
+              fontSize:13, fontWeight:700, letterSpacing:"0.02em",
+            }}>UI</span>
           </div>
-          <span style={{ color:"white", fontWeight:700, fontSize:13, letterSpacing:"0.02em" }}>
-            CIMENTACIONES PRO
+          <div style={{ display:"flex", flexDirection:"column", lineHeight:1.2 }}>
+            <span style={{
+              color: C.textInv, fontFamily: FONT_COND,
+              fontSize:13, fontWeight:700, letterSpacing:"0.06em", textTransform:"uppercase",
+            }}>CIMENTACIONES PRO</span>
+            <span style={{ color: C.gold, fontSize:9.5, fontFamily: FONT_MONO, opacity:0.85 }}>
+              UNIVERSIDAD DE IBAGUÉ · v1.0
+            </span>
+          </div>
+        </div>
+
+        {/* Separador dorado */}
+        <div style={{ width:1, height:26, background: C.gold, opacity:0.3, marginRight:4 }}/>
+
+        {/* Proyecto activo */}
+        <div style={{ display:"flex", flexDirection:"column", lineHeight:1.25 }}>
+          <span style={{ color: C.muted, fontSize:9.5, fontFamily: FONT_COND, letterSpacing:"0.08em", textTransform:"uppercase" }}>
+            Proyecto activo
           </span>
-          <span style={{ color:"#64748b", fontSize:11 }}>v1.0</span>
+          <span style={{ color: C.textInv, fontSize:12, fontWeight:600, fontFamily: FONT_COND }}>
+            {proyecto.nombre}
+          </span>
         </div>
 
-        <div style={{ width:1, height:20, background:"#334155" }}/>
+        <div style={{ width:1, height:26, background: C.gold, opacity:0.2, margin:"0 4px" }}/>
 
-        <div style={{ display:"flex", flexDirection:"column" }}>
-          <span style={{ color:"#94a3b8", fontSize:10 }}>Proyecto activo</span>
-          <span style={{ color:"white", fontSize:12, fontWeight:600 }}>{proyecto.nombre}</span>
-        </div>
-
-        {/* Separador */}
-        <div style={{ width:1, height:20, background:"#334155" }}/>
-
-        {/* Acciones toolbar */}
+        {/* Acciones */}
         {[
-          { icon: RefreshCw,  label: "Recalcular",    action: handleCalc,           disabled: calculando },
-          { icon: Save,       label: "Guardar",        action: guardarProyectoActual, disabled: false },
-          { icon: Download,   label: "Exportar JSON",  action: handleExportar,       disabled: false },
-          { icon: LogOut,     label: "Cerrar",         action: cerrarProyecto,       disabled: false },
-        ].map(({ icon: Icon, label, action, disabled }) => (
+          { icon:RefreshCw, label:"Recalcular",    action:handleCalc,            disabled:calculando },
+          { icon:Save,      label:"Guardar",        action:guardarProyectoActual, disabled:false },
+          { icon:Download,  label:"Exportar JSON",  action:handleExportar,       disabled:false },
+        ].map(({ icon:Icon, label, action, disabled }) => (
           <button key={label} onClick={action} disabled={disabled}
             style={{
               display:"flex", alignItems:"center", gap:5,
-              background:"transparent", border:"none", cursor: disabled ? "wait" : "pointer",
-              color: label === "Cerrar" ? "#f87171" : "#cbd5e1",
-              padding:"4px 10px", borderRadius:3,
-              fontSize:12, transition:"all 0.15s", opacity: disabled ? 0.5 : 1,
+              background:"transparent", border:"none",
+              cursor:disabled?"wait":"pointer",
+              color:"#8aa8c8",
+              padding:"4px 9px", borderRadius:3,
+              fontSize:11, fontFamily:FONT_COND, fontWeight:600,
+              letterSpacing:"0.04em", textTransform:"uppercase",
+              transition:"all 0.15s", opacity:disabled?0.4:1,
             }}
-            onMouseEnter={e => (e.currentTarget.style.background="#243447")}
-            onMouseLeave={e => (e.currentTarget.style.background="transparent")}
+            onMouseEnter={e => { e.currentTarget.style.background=C.navyMid; e.currentTarget.style.color=C.gold; }}
+            onMouseLeave={e => { e.currentTarget.style.background="transparent"; e.currentTarget.style.color="#8aa8c8"; }}
           >
-            <Icon size={13}/> {label}
+            <Icon size={12}/> {label}
           </button>
         ))}
 
-        {/* Botón Calcular */}
+        {/* Cerrar — rojo */}
+        <button onClick={cerrarProyecto}
+          style={{
+            display:"flex", alignItems:"center", gap:5,
+            background:"transparent", border:"none", cursor:"pointer",
+            color:"#f87171", padding:"4px 9px", borderRadius:3,
+            fontSize:11, fontFamily:FONT_COND, fontWeight:600,
+            letterSpacing:"0.04em", textTransform:"uppercase", transition:"all 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background="#3f1a1a"; }}
+          onMouseLeave={e => { e.currentTarget.style.background="transparent"; }}
+        >
+          <LogOut size={12}/> Cerrar
+        </button>
+
+        {/* Botón principal — dorado */}
         <button onClick={handleCalc} disabled={calculando}
           style={{
             marginLeft:"auto",
-            display:"flex", alignItems:"center", gap:6,
-            background: calculando ? "#334155" : "#0057b8",
-            color:"white", border:"none", cursor:calculando?"wait":"pointer",
-            padding:"6px 16px", borderRadius:4, fontWeight:600, fontSize:12,
+            display:"flex", alignItems:"center", gap:7,
+            background: calculando ? C.navyMid : C.gold,
+            color: calculando ? "#8aa8c8" : C.navy,
+            border:"none", cursor:calculando?"wait":"pointer",
+            padding:"7px 18px", borderRadius:3,
+            fontFamily:FONT_COND, fontWeight:700,
+            fontSize:12, letterSpacing:"0.08em", textTransform:"uppercase",
             transition:"background 0.15s",
+            boxShadow: calculando ? "none" : `0 0 0 1px ${C.goldH}`,
           }}
-          onMouseEnter={e => { if(!calculando) e.currentTarget.style.background="#0046a0"; }}
-          onMouseLeave={e => { if(!calculando) e.currentTarget.style.background="#0057b8"; }}
+          onMouseEnter={e => { if(!calculando) e.currentTarget.style.background=C.goldH; }}
+          onMouseLeave={e => { if(!calculando) e.currentTarget.style.background=C.gold; }}
         >
           {calculando
-            ? <><RefreshCw size={13} style={{animation:"spin 1s linear infinite"}}/> Calculando...</>
-            : <><Calculator size={13}/> Ejecutar análisis</>
+            ? <><RefreshCw size={12} style={{animation:"spin 1s linear infinite"}}/> Calculando...</>
+            : <><Calculator size={12}/> Ejecutar análisis</>
           }
         </button>
 
-        {/* Badges de estado */}
+        {/* Badges de verificación */}
         {resultado && (
-          <div style={{ display:"flex", gap:6, marginLeft:8 }}>
+          <div style={{ display:"flex", gap:5, marginLeft:6 }}>
             {[
-              { label:"Capacidad", ok: cumpleMeyerhof },
-              { label:"Asentam.", ok: cumpleAsentam },
-              { label:"β angular", ok: cumpleDif },
+              { label:"Capacidad", ok:cumpleMeyerhof },
+              { label:"Asent.",    ok:cumpleAsentam  },
+              { label:"β angular", ok:cumpleDif      },
             ].map(({ label, ok }) => (
               <span key={label} style={{
-                fontSize:10, padding:"2px 8px", borderRadius:2, fontWeight:600,
-                background: ok ? "#15803d" : "#b91c1c",
-                color: "white",
+                fontSize:9.5, padding:"2px 7px", borderRadius:2,
+                fontFamily:FONT_COND, fontWeight:700, letterSpacing:"0.04em",
+                background: ok ? "#14532d" : "#7f1d1d",
+                color: ok ? "#86efac" : "#fca5a5",
+                border: `1px solid ${ok ? "#16a34a" : "#dc2626"}`,
               }}>
                 {ok ? "✓" : "✗"} {label}
               </span>
@@ -188,24 +236,26 @@ export default function App() {
         )}
       </div>
 
-      {/* ══ CUERPO PRINCIPAL ══════════════════════════════════════════════ */}
+      {/* ══ CUERPO ═══════════════════════════════════════════════════════════ */}
       <div style={{ display:"flex", flex:1, overflow:"hidden" }}>
 
-        {/* ── SIDEBAR ─────────────────────────────────────────────────── */}
+        {/* ── SIDEBAR ──────────────────────────────────────────────────────── */}
         <div style={{
-          width:200, background:"#1b2a3b", flexShrink:0,
+          width:196, background:C.navy, flexShrink:0,
           display:"flex", flexDirection:"column",
-          borderRight:"1px solid #243447", overflowY:"auto",
+          borderRight:`1px solid ${C.navyMid}`, overflowY:"auto",
         }}>
           {groups.map(group => (
             <div key={group}>
               <div style={{
-                padding:"10px 12px 4px",
-                fontSize:9, fontWeight:700, letterSpacing:"0.12em",
-                color:"#64748b", textTransform:"uppercase" as const,
+                padding:"11px 12px 4px",
+                fontFamily:FONT_COND,
+                fontSize:9.5, fontWeight:700, letterSpacing:"0.14em",
+                color:C.gold, textTransform:"uppercase" as const, opacity:0.6,
               }}>
                 {group}
               </div>
+
               {NAV.filter(n => n.group === group).map(item => {
                 const disabled = item.needsResult && !resultado;
                 const active   = activeModule === item.id;
@@ -215,24 +265,28 @@ export default function App() {
                     disabled={disabled}
                     onClick={() => setActiveModule(item.id)}
                     style={{
-                      display:"flex", alignItems:"center", gap:9,
-                      width:"100%", border:"none", cursor:disabled?"not-allowed":"pointer",
-                      padding:"7px 14px", textAlign:"left" as const,
-                      background: active ? "#0057b8" : "transparent",
-                      color: disabled ? "#3d4f61" : active ? "white" : "#94a3b8",
-                      fontSize:12, fontWeight: active ? 600 : 400,
-                      borderLeft: active ? "3px solid #60a5fa" : "3px solid transparent",
+                      display:"flex", alignItems:"center", gap:8,
+                      width:"100%", border:"none",
+                      cursor:disabled?"not-allowed":"pointer",
+                      padding:"6px 12px", textAlign:"left" as const,
+                      background: active ? C.navyMid : "transparent",
+                      color: disabled ? "#3a4d65"
+                           : active   ? C.textInv
+                           :            "#8aa8c8",
+                      fontFamily: FONT_COND,
+                      fontSize:12, fontWeight:active?700:500,
+                      letterSpacing:"0.02em",
+                      borderLeft: active ? `3px solid ${C.gold}` : "3px solid transparent",
                       transition:"all 0.12s",
                     }}
-                    onMouseEnter={e => { if(!disabled && !active) e.currentTarget.style.background="#243447"; }}
-                    onMouseLeave={e => { if(!active) e.currentTarget.style.background="transparent"; }}
+                    onMouseEnter={e => { if(!disabled && !active) { e.currentTarget.style.background=C.navyMid; e.currentTarget.style.color=C.gold; }}}
+                    onMouseLeave={e => { if(!active) { e.currentTarget.style.background="transparent"; e.currentTarget.style.color=disabled?"#3a4d65":"#8aa8c8"; }}}
                   >
-                    <Icon size={13}/>
+                    <Icon size={12}/>
                     <span style={{ flex:1, fontSize:11.5 }}>{item.label}</span>
                     <span style={{
-                      fontSize:9, fontWeight:700,
-                      color: active ? "#bfdbfe" : "#475569",
-                      fontFamily:"monospace",
+                      fontSize:9, fontWeight:700, fontFamily:FONT_MONO,
+                      color:active ? C.gold : "#3a4d65",
                     }}>{item.short}</span>
                   </button>
                 );
@@ -241,142 +295,130 @@ export default function App() {
           ))}
         </div>
 
-        {/* ── ÁREA PRINCIPAL ──────────────────────────────────────────── */}
+        {/* ── ÁREA PRINCIPAL ───────────────────────────────────────────────── */}
         <div style={{ flex:1, display:"flex", flexDirection:"column", overflow:"hidden" }}>
 
-          {/* Breadcrumb / título del módulo */}
+          {/* Breadcrumb */}
           <div style={{
-            background:"white", borderBottom:"1px solid #e5e7eb",
-            padding:"6px 20px", display:"flex", alignItems:"center", gap:6,
+            background: C.surface,
+            borderBottom:`1px solid ${C.border}`,
+            padding:"5px 18px", display:"flex", alignItems:"center", gap:6,
             flexShrink:0,
           }}>
-            <Activity size={12} color="#0057b8"/>
-            <span style={{ color:"#6b7280", fontSize:11 }}>
+            <Activity size={11} color={C.gold}/>
+            <span style={{ color:C.muted, fontSize:10.5, fontFamily:FONT_COND, letterSpacing:"0.06em" }}>
               {NAV.find(n => n.id === activeModule)?.group}
             </span>
-            <ChevronRight size={10} color="#9ca3af"/>
-            <span style={{ color:"#1a1d23", fontSize:11, fontWeight:600 }}>
+            <ChevronRight size={9} color={C.borderH}/>
+            <span style={{
+              color:C.text, fontSize:10.5, fontWeight:700,
+              fontFamily:FONT_COND, letterSpacing:"0.06em",
+              textTransform:"uppercase",
+            }}>
               {NAV.find(n => n.id === activeModule)?.label}
             </span>
           </div>
 
-          {/* Error banner */}
+          {/* Error */}
           {error && (
             <div style={{
               background:"#fef2f2", borderBottom:"1px solid #fca5a5",
-              padding:"8px 20px", display:"flex", alignItems:"center", gap:8,
-              color:"#991b1b", fontSize:12, flexShrink:0,
+              padding:"7px 18px", display:"flex", alignItems:"center", gap:8,
+              color:"#991b1b", fontSize:12, fontFamily:FONT_COND, flexShrink:0,
             }}>
               <AlertTriangle size={13}/> {error}
             </div>
           )}
 
-          {/* Contenido del módulo */}
-          <div style={{ flex:1, overflow:"auto", padding:"16px 20px" }}>
+          {/* Contenido */}
+          <div style={{ flex:1, overflow:"auto", padding:"14px 18px", background:C.bg }}>
 
-            {/* ─ PARÁMETROS ─ */}
             {activeModule === "parametros" && (
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16 }}>
-                <Panel title="Parámetros globales" icon={Settings}>
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+                <UIPanel title="Parámetros globales" icon={Settings}>
                   <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
                     <div style={{ gridColumn:"1/-1" }}>
-                      <FieldLabel>Nombre del proyecto</FieldLabel>
-                      <EngInput
-                        value={proyecto.nombre}
-                        onChange={v => setProyecto({ ...proyecto, nombre: v })}
-                      />
+                      <UILabel>Nombre del proyecto</UILabel>
+                      <UIInput value={proyecto.nombre} onChange={v => setProyecto({ ...proyecto, nombre:v })}/>
                     </div>
                     <div>
-                      <FieldLabel>Df — Profundidad de desplante</FieldLabel>
-                      <EngInputNum value={proyecto.Df} unit="m"
-                        onChange={v => setProyecto({ ...proyecto, Df: v })}/>
+                      <UILabel>Df — Profundidad de desplante</UILabel>
+                      <UIInputNum value={proyecto.Df} unit="m" onChange={v => setProyecto({ ...proyecto, Df:v })}/>
                     </div>
                     <div>
-                      <FieldLabel>FS — Factor de seguridad</FieldLabel>
-                      <EngInputNum value={proyecto.FS}
-                        onChange={v => setProyecto({ ...proyecto, FS: v })}/>
+                      <UILabel>FS — Factor de seguridad</UILabel>
+                      <UIInputNum value={proyecto.FS} onChange={v => setProyecto({ ...proyecto, FS:v })}/>
                     </div>
                     <div>
-                      <FieldLabel>α — Inclinación de carga</FieldLabel>
-                      <EngInputNum value={proyecto.inclinacion_alpha} unit="°"
-                        onChange={v => setProyecto({ ...proyecto, inclinacion_alpha: v })}/>
+                      <UILabel>α — Inclinación de carga</UILabel>
+                      <UIInputNum value={proyecto.inclinacion_alpha} unit="°" onChange={v => setProyecto({ ...proyecto, inclinacion_alpha:v })}/>
                     </div>
                     <div>
-                      <FieldLabel>Horizonte temporal (creep)</FieldLabel>
-                      <EngInputNum value={proyecto.tiempo_anios} unit="años"
-                        onChange={v => setProyecto({ ...proyecto, tiempo_anios: v })}/>
+                      <UILabel>Horizonte temporal (creep)</UILabel>
+                      <UIInputNum value={proyecto.tiempo_anios} unit="años" onChange={v => setProyecto({ ...proyecto, tiempo_anios:v })}/>
                     </div>
                   </div>
-                </Panel>
+                </UIPanel>
 
-                <Panel title="Columnas y zapatas" icon={Grid}>
-                  <ColumnasForm
-                    columnas={proyecto.columnas}
-                    onChange={cols => setProyecto({ ...proyecto, columnas: cols })}
-                  />
-                </Panel>
+                <UIPanel title="Columnas y zapatas" icon={Grid}>
+                  <ColumnasForm columnas={proyecto.columnas} onChange={cols => setProyecto({ ...proyecto, columnas:cols })}/>
+                </UIPanel>
               </div>
             )}
 
-            {/* ─ SONDEOS ─ */}
             {activeModule === "sondeos" && (
-              <Panel title="Perfil estratigráfico — Sondeos" icon={Database}>
-                <SondeosForm
-                  sondeos={proyecto.sondeos}
-                  onChange={s => setProyecto({ ...proyecto, sondeos: s })}
-                />
-              </Panel>
+              <UIPanel title="Perfil estratigráfico — Sondeos" icon={Database}>
+                <SondeosForm sondeos={proyecto.sondeos} onChange={s => setProyecto({ ...proyecto, sondeos:s })}/>
+              </UIPanel>
             )}
 
-            {/* ─ MÓDULOS DE RESULTADO ─ */}
             {activeModule === "m4"          && resultado && <MeyerhofTable data={resultado.meyerhof} />}
             {activeModule === "m5"          && resultado && <BoussinesqChart data={resultado.boussinesq} />}
             {activeModule === "m8"          && resultado && <AsentamientosChart resultado={resultado} />}
             {activeModule === "diferencial" && resultado && <DiferencialTable data={resultado.diferencial} />}
             {activeModule === "planta"      && resultado && <PlantaViz resultado={resultado} columnas={proyecto.columnas} />}
             {activeModule === "terzaghi"    && resultado && (
-              <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
+              <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
                 <TerzaghiChart data={resultado.terzaghi_tabla} />
-                <Panel title="qu por columna — Terzaghi vs Meyerhof" icon={BookOpen}>
+                <UIPanel title="qu por columna — Terzaghi vs Meyerhof" icon={BookOpen}>
                   <table className="eng-table">
                     <thead>
                       <tr>
-                        {["Columna","φ (°)","qu Terzaghi (t/m²)","qu Meyerhof (t/m²)","Diferencia %"].map(h => (
-                          <th key={h}>{h}</th>
-                        ))}
+                        {["Columna","φ (°)","qu Terzaghi (t/m²)","qu Meyerhof (t/m²)","Diferencia %"].map(h => <th key={h}>{h}</th>)}
                       </tr>
                     </thead>
                     <tbody>
                       {resultado.terzaghi_cols.map(r => (
                         <tr key={r.col_id}>
-                          <td style={{ color:"#0057b8", fontWeight:700 }}>{r.col_id}</td>
+                          <td>{r.col_id}</td>
                           <td>{r.phi}</td>
                           <td>{r.qu_Terzaghi.toFixed(2)}</td>
                           <td>{r.qu_Meyerhof.toFixed(2)}</td>
-                          <td style={{ color: r["diferencia_%"] > 0 ? "#15803d" : "#b91c1c", fontWeight:600 }}>
+                          <td style={{ color:r["diferencia_%"] > 0 ? C.success : C.danger, fontWeight:700 }}>
                             {r["diferencia_%"] > 0 ? "+" : ""}{r["diferencia_%"]}%
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                </Panel>
+                </UIPanel>
               </div>
             )}
 
-            {/* Placeholder si no hay resultado */}
             {!resultado && activeModule !== "parametros" && activeModule !== "sondeos" && (
               <div style={{
                 display:"flex", flexDirection:"column", alignItems:"center",
-                justifyContent:"center", height:300, gap:12, color:"#9ca3af",
+                justifyContent:"center", height:280, gap:14, color:C.muted,
               }}>
-                <Calculator size={40} color="#d1d5db"/>
-                <p style={{ fontSize:13, margin:0 }}>
-                  Ejecuta el análisis para ver los resultados de este módulo.
+                <Calculator size={42} color={C.border}/>
+                <p style={{ fontSize:13, margin:0, fontFamily:FONT_COND, letterSpacing:"0.02em" }}>
+                  Ejecuta el análisis para ver los resultados de este módulo
                 </p>
                 <button onClick={handleCalc} style={{
-                  background:"#0057b8", color:"white", border:"none",
-                  padding:"8px 20px", borderRadius:4, cursor:"pointer", fontSize:12, fontWeight:600,
+                  background:C.gold, color:C.navy, border:"none",
+                  padding:"8px 22px", borderRadius:3, cursor:"pointer",
+                  fontFamily:FONT_COND, fontSize:12, fontWeight:700,
+                  letterSpacing:"0.08em", textTransform:"uppercase",
                 }}>
                   Ejecutar análisis
                 </button>
@@ -386,110 +428,104 @@ export default function App() {
         </div>
       </div>
 
-      {/* ══ STATUS BAR INFERIOR ═══════════════════════════════════════════ */}
+      {/* ══ STATUS BAR ════════════════════════════════════════════════════════ */}
       <div style={{
-        background:"#1b2a3b", borderTop:"1px solid #243447",
+        background:C.navy, borderTop:`1px solid ${C.navyMid}`,
         height:22, display:"flex", alignItems:"center",
-        padding:"0 12px", gap:16, flexShrink:0,
+        padding:"0 14px", gap:14, flexShrink:0,
       }}>
         {[
-          { label: `${proyecto.columnas.length} columnas` },
-          { label: `${proyecto.sondeos.length} sondeo${proyecto.sondeos.length !== 1 ? "s" : ""}` },
-          { label: `Df = ${proyecto.Df} m` },
-          { label: `FS = ${proyecto.FS}` },
-          { label: resultado
-              ? (todoOK ? "✓ Modelo verificado — NSR-10" : "⚠ Revisar criterios de diseño")
-              : "Listo — pulse Ejecutar análisis"
-          },
-        ].map((item, i) => (
+          `${proyecto.columnas.length} columnas`,
+          `${proyecto.sondeos.length} sondeo${proyecto.sondeos.length!==1?"s":""}`,
+          `Df = ${proyecto.Df} m`,
+          `FS = ${proyecto.FS}`,
+          resultado
+            ? (todoOK ? "✓ Modelo verificado — NSR-10" : "⚠ Revisar criterios de diseño")
+            : "Listo · pulse Ejecutar análisis",
+        ].map((label, i) => (
           <span key={i} style={{
+            fontFamily:FONT_MONO,
+            fontSize:10.5,
             color: i === 4
-              ? (resultado ? (todoOK ? "#4ade80" : "#fbbf24") : "#64748b")
-              : "#64748b",
-            fontSize:11, fontFamily:"monospace",
+              ? resultado ? (todoOK ? "#86efac" : C.gold) : "#3a4d65"
+              : "#3a4d65",
           }}>
-            {i < 4 && <span style={{ color:"#475569" }}>│ </span>}
-            {item.label}
+            {i > 0 && <span style={{ color:"#243360", marginRight:14 }}>·</span>}
+            {label}
           </span>
         ))}
       </div>
 
-      <style>{`
-        @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
-      `}</style>
+      <style>{`@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }`}</style>
     </div>
   );
 }
 
-// ── Sub-componentes ────────────────────────────────────────────────────────
-
-function Panel({ title, icon: Icon, children }: {
-  title: string; icon: React.ElementType; children: React.ReactNode;
-}) {
+// ── Sub-componentes ────────────────────────────────────────────────────────────
+function UIPanel({ title, icon:Icon, children }: { title:string; icon:React.ElementType; children:React.ReactNode }) {
   return (
     <div style={{
-      background:"white", border:"1px solid #e5e7eb",
+      background:C.surface2, border:`1px solid ${C.border}`,
       borderRadius:4, overflow:"hidden",
-      boxShadow:"0 1px 3px rgba(0,0,0,0.06)",
+      boxShadow:`0 1px 4px rgba(26,39,68,0.08)`,
     }}>
       <div style={{
-        background:"#f1f5f9", borderBottom:"1px solid #e5e7eb",
-        padding:"6px 12px", display:"flex", alignItems:"center", gap:7,
+        background:C.navy, padding:"6px 12px",
+        display:"flex", alignItems:"center", gap:7,
+        borderBottom:`2px solid ${C.gold}`,
       }}>
-        <Icon size={12} color="#0057b8"/>
-        <span style={{ fontSize:11.5, fontWeight:700, color:"#1e293b", textTransform:"uppercase" as const, letterSpacing:"0.04em" }}>
-          {title}
-        </span>
+        <Icon size={12} color={C.gold}/>
+        <span style={{
+          fontFamily:FONT_COND, fontSize:11.5, fontWeight:700,
+          color:C.gold, letterSpacing:"0.08em", textTransform:"uppercase" as const,
+        }}>{title}</span>
       </div>
       <div style={{ padding:14 }}>{children}</div>
     </div>
   );
 }
 
-function FieldLabel({ children }: { children: React.ReactNode }) {
+function UILabel({ children }: { children:React.ReactNode }) {
   return (
-    <label style={{ display:"block", fontSize:10, fontWeight:600, color:"#6b7280",
-      textTransform:"uppercase" as const, letterSpacing:"0.05em", marginBottom:3 }}>
-      {children}
-    </label>
+    <label style={{
+      display:"block", fontFamily:FONT_COND,
+      fontSize:10, fontWeight:700, color:C.muted,
+      textTransform:"uppercase" as const, letterSpacing:"0.07em", marginBottom:3,
+    }}>{children}</label>
   );
 }
 
-function EngInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+function UIInput({ value, onChange }: { value:string; onChange:(v:string)=>void }) {
   return (
     <input value={value} onChange={e => onChange(e.target.value)}
       style={{
-        width:"100%", border:"1px solid #d1d5db", borderRadius:3,
-        padding:"5px 8px", fontSize:12, fontFamily:"inherit",
-        background:"white", color:"#1a1d23",
-        outline:"none",
+        width:"100%", border:`1px solid ${C.border}`, borderRadius:3,
+        padding:"5px 8px", fontSize:12, fontFamily:FONT_COND,
+        background:"white", color:C.text, outline:"none", transition:"border-color 0.15s",
       }}
-      onFocus={e => e.target.style.borderColor="#0057b8"}
-      onBlur={e => e.target.style.borderColor="#d1d5db"}
+      onFocus={e => e.target.style.borderColor=C.gold}
+      onBlur={e => e.target.style.borderColor=C.border}
     />
   );
 }
 
-function EngInputNum({ value, unit, onChange }: {
-  value: number; unit?: string; onChange: (v: number) => void;
-}) {
+function UIInputNum({ value, unit, onChange }: { value:number; unit?:string; onChange:(v:number)=>void }) {
   return (
     <div style={{ position:"relative" }}>
-      <input type="number" value={value}
-        onChange={e => onChange(parseFloat(e.target.value))}
+      <input type="number" value={value} onChange={e => onChange(parseFloat(e.target.value))}
         style={{
-          width:"100%", border:"1px solid #d1d5db", borderRadius:3,
-          padding:"5px 32px 5px 8px", fontSize:12,
-          fontFamily:"Consolas, monospace", background:"white", color:"#1a1d23",
-          outline:"none",
+          width:"100%", border:`1px solid ${C.border}`, borderRadius:3,
+          padding:`5px ${unit?"30px":"8px"} 5px 8px`, fontSize:12,
+          fontFamily:FONT_MONO, background:"white", color:C.text,
+          outline:"none", transition:"border-color 0.15s",
         }}
-        onFocus={e => e.target.style.borderColor="#0057b8"}
-        onBlur={e => e.target.style.borderColor="#d1d5db"}
+        onFocus={e => e.target.style.borderColor=C.gold}
+        onBlur={e => e.target.style.borderColor=C.border}
       />
       {unit && (
         <span style={{
           position:"absolute", right:8, top:"50%", transform:"translateY(-50%)",
-          fontSize:10, color:"#9ca3af", pointerEvents:"none",
+          fontSize:9.5, color:C.muted, fontFamily:FONT_COND, pointerEvents:"none",
         }}>{unit}</span>
       )}
     </div>
