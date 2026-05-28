@@ -202,6 +202,47 @@ footer{padding:2.5rem 3rem;border-top:1px solid rgba(255,255,255,.06);background
 /* ── Beta badge ── */
 .badge-beta-idx{display:inline-block;background:#d97706;color:#fff;border-radius:3px;font-size:.55rem;padding:.05rem .3rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-left:.38rem;vertical-align:middle;cursor:help;line-height:1.5}
 
+/* ── Grain texture over hero ── */
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");background-size:180px;opacity:.45}
+
+/* ── Scroll reveal ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.08s}
+.reveal-delay-2{transition-delay:.16s}
+.reveal-delay-3{transition-delay:.24s}
+.reveal-delay-4{transition-delay:.32s}
+
+/* ── Gradient border on modo-card hover ── */
+.modo-card{position:relative;isolation:isolate}
+.modo-card::before{content:'';position:absolute;inset:-1px;border-radius:15px;background:linear-gradient(135deg,rgba(37,99,235,.4),rgba(212,130,10,.3));opacity:0;transition:opacity .3s;z-index:-1;pointer-events:none}
+.modo-card:hover::before{opacity:1}
+
+/* ── Workflow step enhanced ── */
+.wf-step:hover .wf-icon{transform:scale(1.2) rotate(-8deg);display:inline-block}
+.wf-icon{transition:transform .25s cubic-bezier(.34,1.56,.64,1);display:inline-block}
+
+/* ── Module card gradient accent ── */
+.module-card{position:relative;isolation:isolate}
+.module-card::after{content:'';position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,rgba(37,99,235,.04),transparent);opacity:0;transition:opacity .25s;pointer-events:none}
+.module-card:hover::after{opacity:1}
+
+/* ── Feature cards enhanced ── */
+.feat{position:relative;overflow:hidden}
+.feat::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,.03),transparent);opacity:0;transition:opacity .2s}
+.feat:hover::before{opacity:1}
+
+/* ── Nav scrolled shadow ── */
+nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
+
+/* ── Tagline highlighted word ── */
+.hero-tagline strong{color:var(--amberL);font-style:normal;font-weight:600}
+
+/* ── Stats bar hover ── */
+.stat{transition:background .2s}
+.stat:hover{background:var(--g50)}
+.stat:hover .stat-val{color:var(--blue)}
+
 /* ── Responsive ── */
 @media(max-width:900px){
   .workflow::before{display:none}
@@ -255,14 +296,14 @@ footer{padding:2.5rem 3rem;border-top:1px solid rgba(255,255,255,.06);background
     </div>
     <h1 class="hero-title">STRA<span class="outline">TEX</span></h1>
     <p class="hero-tagline">
-      Verifica la capacidad portante y los asentamientos de tus zapatas,<br>
-      o deja que STRATEX proponga las dimensiones óptimas automáticamente.<br>
-      Sin ábacos. Sin interpolación. Fórmulas cerradas verificadas contra NSR-10.<br>
-      <span style="font-size:.85em;opacity:.65;font-style:normal;letter-spacing:.5px">Próximamente en línea — un dominio para que todos puedan usarlo directamente desde el navegador.</span>
+      Verifica la <strong>capacidad portante</strong> y los <strong>asentamientos</strong> de tus zapatas,<br>
+      o deja que STRATEX proponga las <strong>dimensiones óptimas</strong> automáticamente.<br>
+      Sin ábacos. Sin interpolación. <strong>Fórmulas cerradas</strong> verificadas contra NSR-10.<br>
+      <span style="font-size:.85em;opacity:.65;font-style:normal;letter-spacing:.5px">Disponible en línea · abre desde cualquier navegador sin instalación.</span>
     </p>
     <div class="cta-group">
       <a href="app.html" class="btn-primary"><span>⚡</span> Abrir Software</a>
-      <a href="app.html" download="STRATEX_v1.0.html" class="btn-secondary"><span>⬇</span> Descargar .exe</a>
+      <a href="app.html" download="STRATEX_v1.0.html" class="btn-secondary"><span>⬇</span> Descargar .html</a>
     </div>
   </div>
 </section>
@@ -697,7 +738,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid rgba(255,255,255,.06);background
   <p>Carga el perfil de suelo, define las zapatas, presiona calcular.</p>
   <div class="cta-group">
     <a href="app.html" class="btn-mid" style="font-size:1.05rem;padding:1rem 2.4rem"><span>⚡</span> Abrir STRATEX</a>
-    <a href="app.html" download="STRATEX_v1.0.html" class="btn-out" style="font-size:1.05rem;padding:.95rem 2.4rem"><span>⬇</span> Descargar .exe</a>
+    <a href="app.html" download="STRATEX_v1.0.html" class="btn-out" style="font-size:1.05rem;padding:.95rem 2.4rem"><span>⬇</span> Descargar .html</a>
   </div>
   <p class="cta-note">Demo incluido: 3 sondeos · 12 zapatas · arena densa / arcilla blanda / arena media · Nf = 1.0–1.5 m</p>
   <p class="cta-note" style="margin-top:.3rem;color:var(--g400)">Próximamente disponible en dominio propio — acceso en línea para todos.</p>
@@ -752,6 +793,29 @@ footer{padding:2.5rem 3rem;border-top:1px solid rgba(255,255,255,.06);background
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);t++;requestAnimationFrame(draw);
   }
   window.addEventListener('resize',resize);resize();draw();
+})();
+
+/* ── Scroll reveal ── */
+(function(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.modo-card,.wf-step,.module-card,.feat,.v2-card,.viz-stat,.plan2d-card').forEach((el,i)=>{
+    el.classList.add('reveal');
+    const delay=['reveal-delay-1','reveal-delay-2','reveal-delay-3','reveal-delay-4'][i%4];
+    el.classList.add(delay);
+    obs.observe(el);
+  });
+  // Section titles
+  document.querySelectorAll('.section-title,.section-desc,.section-label').forEach(el=>{
+    el.classList.add('reveal');obs.observe(el);
+  });
+})();
+
+/* ── Nav shadow on scroll ── */
+(function(){
+  const nav=document.querySelector('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
 })();
 
 /* ── Stat counters ── */

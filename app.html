@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>STRATEX — Análisis de Cimentaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -18,10 +21,10 @@
   --shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--g100);color:var(--g900);font-size:14px}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--g100);color:var(--g900);font-size:14px}
 
 /* ── Header ── */
-.hdr{background:var(--navy);color:#fff;padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.hdr{background:linear-gradient(135deg,#0a1a35 0%,var(--navy) 60%,#0f2347 100%);color:#fff;padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.45);border-bottom:1px solid rgba(255,255,255,.06)}
 .hdr-brand{display:flex;align-items:center;gap:.75rem}
 .hdr-logo{width:40px;height:32px;background:transparent;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .hdr-title{font-size:1.1rem;font-weight:700;line-height:1.2}
@@ -29,15 +32,15 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--g100);color:va
 .hdr-actions{display:flex;gap:.5rem;align-items:center;flex-shrink:0}
 
 /* ── Tabs ── */
-.tabs{background:var(--blue);display:flex;overflow-x:auto;scrollbar-width:none}
+.tabs{background:linear-gradient(180deg,var(--blue) 0%,#173172 100%);display:flex;overflow-x:auto;scrollbar-width:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .tabs::-webkit-scrollbar{display:none}
-.tab{padding:.6rem 1rem;background:none;border:none;color:rgba(255,255,255,.65);cursor:pointer;font-size:.75rem;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
-.tab:hover{color:#fff;background:rgba(255,255,255,.08)}
-.tab.active{color:#fff;border-bottom-color:var(--amberL)}
+.tab{padding:.62rem 1.1rem;background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:.73rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:all .18s;text-transform:uppercase;letter-spacing:.6px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+.tab:hover{color:#fff;background:rgba(255,255,255,.09)}
+.tab.active{color:#fff;border-bottom-color:var(--amberL);background:rgba(255,255,255,.07)}
 
 /* ── Layout ── */
 .content{max-width:1400px;margin:0 auto;padding:1.25rem}
-.panel{display:none}.panel.active{display:block}
+.panel{display:none}.panel.active{display:block;animation:resultFadeUp .3s cubic-bezier(.22,1,.36,1) both}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 
 /* ── Cards ── */
@@ -48,8 +51,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--g100);color:va
 /* ── Forms ── */
 .fg{display:flex;flex-direction:column;gap:.2rem}
 label{font-size:.7rem;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:.4px}
-input,select{border:1px solid var(--g300);border-radius:5px;padding:.45rem .7rem;font-size:.85rem;width:100%;transition:border-color .15s}
-input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+input,select{border:1px solid var(--g300);border-radius:6px;padding:.47rem .75rem;font-size:.84rem;width:100%;transition:border-color .15s,box-shadow .15s;background:#fff;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.14),0 1px 3px rgba(59,130,246,.1)}
+input:hover:not(:focus),select:hover:not(:focus){border-color:var(--g400)}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:.65rem}
 .form-grid-wide{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.65rem}
 
@@ -67,11 +71,11 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 .tbl th{background:var(--navy);color:#fff;padding:.45rem .7rem;text-align:left;font-size:.72rem;white-space:nowrap}
 .tbl td{padding:.45rem .7rem;border-bottom:1px solid var(--g200)}
 .tbl tr:hover td{background:var(--g50)}
-.num{font-family:'Courier New',monospace;text-align:right!important}
+.num{font-family:'JetBrains Mono','Courier New',monospace;text-align:right!important}
 
 /* ── Result boxes ── */
 .rbox{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border-radius:8px;padding:1rem 1.25rem;text-align:center}
-.rbox .val{font-size:1.8rem;font-weight:800;font-family:'Courier New',monospace;line-height:1}
+.rbox .val{font-size:1.8rem;font-weight:700;font-family:'JetBrains Mono','Courier New',monospace;line-height:1;letter-spacing:-1px}
 .rbox .lbl{font-size:.7rem;opacity:.75;margin-top:.25rem}
 .res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.75rem;margin-bottom:1rem}
 
@@ -147,7 +151,39 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 
 /* ── Misc ── */
 .row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:.75rem}
-.empty-state{text-align:center;padding:2rem;color:var(--g500);font-size:.85rem}
+.empty-state{text-align:center;padding:3rem 2rem;color:var(--g500);font-size:.85rem;background:linear-gradient(135deg,var(--g50),#fff);border-radius:10px;border:1.5px dashed var(--g300)}
+.empty-state::before{content:'◈';display:block;font-size:2rem;margin-bottom:.75rem;opacity:.25;color:var(--mid)}
+
+/* ── Result entry animation ── */
+@keyframes resultFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.card{animation:resultFadeUp .38s cubic-bezier(.22,1,.36,1) both}
+.res-item{animation:resultFadeUp .32s cubic-bezier(.22,1,.36,1) both}
+
+/* ── Table improvements ── */
+.tbl tbody tr:nth-child(even) td{background:rgba(241,245,249,.6)}
+.tbl tbody tr:hover td{background:rgba(219,234,254,.35)!important}
+.tbl th{background:linear-gradient(180deg,var(--blue),var(--navy));font-size:.7rem;letter-spacing:.3px;padding:.5rem .75rem}
+.tbl td{padding:.5rem .75rem;font-size:.8rem;transition:background .1s}
+
+/* ── Chart container improvements ── */
+.chart-wrap{position:relative;height:320px;background:#fff;border-radius:8px;padding:.75rem;border:1px solid var(--g200);box-shadow:0 1px 6px rgba(13,31,60,.06)}
+
+/* ── Badge improvements ── */
+.badge-ok{background:linear-gradient(135deg,#d1fae5,#a7f3d0);color:#065f46;border:1px solid rgba(6,95,70,.15)}
+.badge-fail{background:linear-gradient(135deg,#fee2e2,#fecaca);color:#991b1b;border:1px solid rgba(153,27,27,.15)}
+.badge-warn{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border:1px solid rgba(146,64,14,.15)}
+
+/* ── Card title improvement ── */
+.card-title{font-size:.92rem;font-weight:700;color:var(--navy);padding-bottom:.6rem;margin-bottom:.9rem;border-bottom:2px solid var(--accent);display:flex;align-items:center;gap:.5rem;letter-spacing:.15px}
+
+/* ── Result box glow ── */
+.rbox{background:linear-gradient(135deg,#0d1f3c,#1a3d7c,#0f2040);border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 20px rgba(13,31,60,.25)}
+
+/* ── Formula box ── */
+.formula{background:linear-gradient(135deg,var(--g50),#fff);border-left:3px solid var(--accent);padding:.65rem .95rem;font-family:'JetBrains Mono','Courier New',monospace;font-size:.76rem;border-radius:0 6px 6px 0;margin:.45rem 0;color:var(--g700);box-shadow:inset 0 0 0 1px rgba(59,130,246,.08)}
+
+/* ── cs-val monospace ── */
+.cs-val{font-family:'JetBrains Mono','Courier New',monospace;font-weight:700;color:var(--navy)}
 
 /* ── Chart description ── */
 .chart-desc{font-size:.75rem;color:var(--g500);margin:.3rem 0 .8rem;line-height:1.5;padding:.35rem .6rem;border-left:2px solid var(--g300);background:var(--g50);border-radius:0 4px 4px 0}
