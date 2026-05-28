@@ -78,11 +78,12 @@ nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-co
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── Stats bar ── */
-.stats-bar{display:flex;justify-content:center;background:#fff;border-bottom:1px solid var(--g200);box-shadow:0 2px 12px rgba(13,31,60,.04)}
-.stat{flex:1;min-width:130px;max-width:230px;text-align:center;padding:1.6rem 1rem;border-right:1px solid var(--g200)}
+.stats-bar{display:flex;justify-content:center;background:#fff;border-bottom:1px solid var(--g200);border-top:1px solid var(--g200)}
+.stat{flex:1;min-width:120px;max-width:220px;text-align:center;padding:1.1rem 1rem;border-right:1px solid var(--g200);transition:background .2s}
 .stat:last-child{border-right:none}
-.stat-val{font-family:'Fira Code',monospace;font-size:2.1rem;font-weight:700;color:var(--mid);line-height:1}
-.stat-lbl{font-size:.66rem;color:var(--g500);margin-top:.35rem;letter-spacing:.5px;text-transform:uppercase;font-family:'Rajdhani',sans-serif}
+.stat:hover{background:var(--g50)}
+.stat-val{font-family:'Fira Code',monospace;font-size:1.25rem;font-weight:700;color:var(--navy);line-height:1}
+.stat-lbl{font-size:.7rem;color:var(--g500);margin-top:.32rem;letter-spacing:.3px;text-transform:uppercase;font-family:'Rajdhani',sans-serif}
 
 /* ── Sections ── */
 section{padding:5.5rem 2rem}
@@ -269,10 +270,7 @@ nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
 /* ── Tagline highlighted word ── */
 .hero-tagline strong{color:var(--amberL);font-style:normal;font-weight:600}
 
-/* ── Stats bar hover ── */
-.stat{transition:background .2s}
-.stat:hover{background:var(--g50)}
-.stat:hover .stat-val{color:var(--blue)}
+/* ── Stats bar hover — handled in .stats-bar rule above ── */
 
 /* ── Responsive ── */
 @media(max-width:900px){
@@ -431,7 +429,7 @@ nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
     <div class="stat-lbl">Casos nivel freático</div>
   </div>
   <div class="stat">
-    <div class="stat-val" style="font-size:1.2rem;letter-spacing:1px">NSR‑10</div>
+    <div class="stat-val" style="letter-spacing:1px">NSR‑10</div>
     <div class="stat-lbl">Verificación automática</div>
   </div>
 </div>
