@@ -387,6 +387,104 @@ body{padding-bottom:56px}
 .sc-badge.ok{background:#dcfce7;color:#15803d}
 .sc-badge.fail{background:#fee2e2;color:#b91c1c}
 
+/* ══════════════════════════════════════════
+   DARK MODE
+══════════════════════════════════════════ */
+body.dark{--g50:#080f1e;--g100:#0d1829;--g200:#142238;--g300:#1c3050;--g500:#7a9ab8;--g700:#b8cfe0;--g900:#e2ecf4;background:var(--g50);color:var(--g900)}
+body.dark .card{background:#0d1829;border-color:#142238;box-shadow:0 1px 6px rgba(0,0,0,.4)}
+body.dark .card-title{border-bottom-color:#1c3050;color:#c8dcea}
+body.dark input,body.dark select{background:#080f1e;border-color:#1c3050;color:#c8dcea}
+body.dark input:focus,body.dark select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.2)}
+body.dark .tbl th{background:linear-gradient(180deg,#0d1829,#080f1e)}
+body.dark .tbl td{border-color:#142238;color:#b8cfe0}
+body.dark .tbl tbody tr:nth-child(even) td{background:rgba(20,34,56,.6)}
+body.dark .tbl tr:hover td{background:rgba(37,99,235,.12)!important}
+body.dark .info{background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.3);color:#93c5fd}
+body.dark .warn-box{background:rgba(217,119,6,.1);border-color:rgba(217,119,6,.3);color:#fbbf24}
+body.dark .formula{background:#080f1e;border-left-color:var(--accent);color:#93c5fd}
+body.dark .chart-wrap{background:#0d1829;border-color:#142238}
+body.dark .chart-desc{background:#080f1e;border-left-color:#1c3050;color:var(--g500)}
+body.dark .chart-interp{background:rgba(37,99,235,.08);border-left-color:rgba(37,99,235,.3);color:#93c5fd}
+body.dark .badge-ok{background:rgba(6,95,70,.35);color:#4ade80;border-color:rgba(74,222,128,.2)}
+body.dark .badge-fail{background:rgba(153,27,27,.35);color:#f87171;border-color:rgba(248,113,113,.2)}
+body.dark .badge-warn{background:rgba(120,53,15,.35);color:#fbbf24;border-color:rgba(251,191,36,.2)}
+body.dark .bh-header,.body.dark .ftg-header{background:#0d1829}
+body.dark .bh-item,.body.dark .ftg-item{border-color:#142238}
+body.dark .strat-item{background:#080f1e;border-color:#142238}
+body.dark .mod-explain{background:#0d1829;border-color:#1c3050;border-left-color:var(--accent)}
+body.dark .mod-explain summary{color:#93c5fd}
+body.dark .res-header{background:#0d1829}
+body.dark .res-header:hover{background:#142238}
+body.dark .rbox{background:linear-gradient(135deg,#050c1a,#0a1830)}
+body.dark .tabs{background:linear-gradient(180deg,#050c1a,#080f1e)}
+body.dark .tab{color:rgba(255,255,255,.45)}
+body.dark .tab.active{color:#fff}
+body.dark .empty-state{background:linear-gradient(135deg,#0d1829,#080f1e);border-color:#1c3050;color:var(--g500)}
+body.dark .scorecard .sc-cell{background:linear-gradient(160deg,#0d1829,#080f1e);border-color:#142238}
+body.dark label{color:var(--g500)}
+body.dark .wlc-step{background:#0d1829;box-shadow:none;border-top-color:var(--accent)}
+body.dark .wlc-step-title{color:#c8dcea}
+body.dark .calc-step{border-bottom-color:#142238}
+body.dark .cs-lbl{color:var(--g500)}
+body.dark .plan-wrap{background:#080f1e;border-color:#142238}
+
+/* ── Dark toggle button ── */
+.dark-toggle{background:none;border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:.26rem .7rem;cursor:pointer;font-size:.75rem;color:rgba(255,255,255,.65);transition:all .2s;display:flex;align-items:center;gap:.32rem;white-space:nowrap}
+.dark-toggle:hover{border-color:rgba(255,255,255,.45);color:#fff;background:rgba(255,255,255,.07)}
+
+/* ── Progress bar ── */
+#calc-progress-wrap{height:3px;background:transparent;position:sticky;top:0;z-index:150;display:none}
+#calc-progress{height:100%;width:0;background:linear-gradient(90deg,#2563eb 0%,#38bdf8 50%,#2563eb 100%);background-size:200%;animation:progressShimmer 1.2s linear infinite;transition:width .25s ease}
+@keyframes progressShimmer{0%{background-position:0%}100%{background-position:200%}}
+
+/* ── FAB (mobile) ── */
+#fab-calc{position:fixed;bottom:74px;right:1.25rem;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#1a3d7c);color:#fff;border:none;cursor:pointer;font-size:1.3rem;display:none;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(37,99,235,.55);z-index:88;transition:all .2s}
+#fab-calc:hover{transform:scale(1.1);box-shadow:0 10px 36px rgba(37,99,235,.7)}
+@media(max-width:720px){#fab-calc{display:flex}}
+
+/* ── Toast system ── */
+#toast-container{position:fixed;bottom:76px;right:1rem;z-index:9998;display:flex;flex-direction:column;gap:.45rem;pointer-events:none;align-items:flex-end}
+.toast{padding:.55rem 1rem;border-radius:10px;font-size:.76rem;font-weight:600;max-width:300px;opacity:0;transform:translateX(14px);transition:all .28s cubic-bezier(.22,1,.36,1);pointer-events:auto;box-shadow:0 6px 24px rgba(0,0,0,.3);backdrop-filter:blur(12px);line-height:1.45}
+.toast.show{opacity:1;transform:none}
+.toast-info{background:rgba(10,18,40,.93);color:#e2e8f0;border:1px solid rgba(255,255,255,.1)}
+.toast-success{background:rgba(5,35,20,.93);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
+.toast-error{background:rgba(40,5,5,.93);color:#f87171;border:1px solid rgba(248,113,113,.2)}
+.toast-warn{background:rgba(40,25,0,.93);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+
+/* ── Module slide transition ── */
+.panel-entering{animation:panelSlideIn .34s cubic-bezier(.22,1,.36,1) both}
+@keyframes panelSlideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+
+/* ── Contextual help tips ── */
+.help-tip{display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;border-radius:50%;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.2);color:var(--mid);font-size:.55rem;font-weight:800;cursor:help;margin-left:.28rem;vertical-align:middle;position:relative;flex-shrink:0}
+.help-tip::after{content:attr(data-help);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1e293b;color:#f1f5f9;font-size:.67rem;font-weight:500;padding:.5rem .7rem;border-radius:8px;white-space:pre-line;width:210px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:600;box-shadow:0 4px 20px rgba(0,0,0,.4);text-align:left;line-height:1.55}
+.help-tip:hover::after{opacity:1}
+body.dark .help-tip{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.25)}
+
+/* ── Pile verification styles ── */
+.pile-input-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.pile-cap-bar{background:linear-gradient(135deg,#1e1b4b,#312e81);color:#fff;border-radius:12px;padding:1.1rem 1.35rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem}
+.pile-cap-item{text-align:center}
+.pile-cap-val{font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:700;color:#c4b5fd;line-height:1;margin-bottom:.18rem}
+.pile-cap-lbl{font-size:.55rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px}
+.pile-layer-tbl{width:100%;border-collapse:collapse;font-size:.76rem;margin-bottom:.6rem}
+.pile-layer-tbl th{background:linear-gradient(180deg,#1e1b4b,#312e81);color:#c4b5fd;padding:.38rem .6rem;font-size:.68rem;text-align:left}
+.pile-layer-tbl td{padding:.38rem .6rem;border-bottom:1px solid var(--g200)}
+.pile-layer-tbl tr:nth-child(even) td{background:rgba(124,58,237,.04)}
+.pile-fs-bar{display:flex;align-items:center;gap:.75rem;padding:.65rem 1rem;border-radius:8px;margin-top:.6rem;font-size:.82rem;font-weight:700}
+.pile-fs-bar.ok{background:#dcfce7;color:#15803d;border:1px solid #86efac}
+.pile-fs-bar.fail{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
+.pile-fs-num{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;line-height:1}
+.pile-group-box{border:1px solid rgba(124,58,237,.3);border-radius:10px;padding:.9rem 1.1rem;background:rgba(124,58,237,.04);margin-top:.75rem}
+.pile-group-title{font-size:.75rem;font-weight:800;color:#7c3aed;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.4px}
+
+/* ── Auto-design decision badge ── */
+.decision-badge{display:inline-flex;align-items:center;gap:.55rem;padding:.55rem 1.2rem;border-radius:10px;font-size:.88rem;font-weight:800;letter-spacing:.3px;margin-bottom:.85rem}
+.decision-badge.sup{background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#14532d;border:1px solid #86efac}
+.decision-badge.deep{background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#4c1d95;border:1px solid #c4b5fd}
+.decision-rationale{font-size:.76rem;color:var(--g500);line-height:1.65;padding:.5rem .75rem;background:var(--g50);border-radius:7px;border-left:3px solid var(--accent);margin-bottom:.85rem}
+body.dark .decision-rationale{background:#080f1e;color:var(--g500)}
+
 /* ── Print ── */
 @media print{
   .hdr,.tabs,.sidebar,.mod-nav,.no-print,.mod-explain{display:none!important}
@@ -464,26 +562,12 @@ body{padding-bottom:56px}
         <span>⚙️</span><span>Diseño Automático</span><span class="chv">▼</span>
       </div>
       <div class="sb-acc-bd" style="padding:.4rem .45rem .5rem">
-        <!-- Superficiales -->
-        <div class="sb-acc2 open" id="sb-sup-design">
-          <div class="sb-acc2-hd" onclick="toggleSbInner('sb-sup-design')">
-            <span>🏗</span><span>Superficiales</span><span class="chv2">▼</span>
-          </div>
-          <div class="sb-acc2-bd">
-            <button class="sb-mod" id="sbm-des"  onclick="sbGoTo('design','design')"><span class="sb-mod-b">DIS</span>Optimización</button>
-            <button class="sb-mod" id="sbm-m2d"  onclick="sbGoTo('m2','design')">   <span class="sb-mod-b">M2</span>Sondeos</button>
-            <button class="sb-mod" id="sbm-m34d" onclick="sbGoTo('m34','design')">  <span class="sb-mod-b">M3·4</span>Cap. Portante</button>
-            <button class="sb-mod" id="sbm-m67d" onclick="sbGoTo('m67','design')">  <span class="sb-mod-b">M6·7</span>Asentamientos</button>
-            <button class="sb-mod" id="sbm-m10d" onclick="sbGoTo('m10','design')">  <span class="sb-mod-b">M10</span>Reporte</button>
-            <button class="sb-mod" id="sbm-m11d" onclick="sbGoTo('m11','design')">  <span class="sb-mod-b">M11</span>Vista 3D</button>
-          </div>
-        </div>
-        <!-- Profundas -->
-        <button class="sb-mod sb-prof-btn" id="sbm-profd" onclick="sbGoTo('prof-design','design')">
-          <span class="sb-mod-b" style="background:rgba(124,58,237,.25);color:#c4b5fd">🔩</span>
-          <span>Profundas</span>
-          <span class="sb-dev-lbl">en desarrollo</span>
-        </button>
+        <button class="sb-mod" id="sbm-des"  onclick="sbGoTo('design','design')"><span class="sb-mod-b">DIS</span>Panel de Diseño</button>
+        <button class="sb-mod" id="sbm-m2d"  onclick="sbGoTo('m2','design')">   <span class="sb-mod-b">M2</span>Sondeos</button>
+        <button class="sb-mod" id="sbm-m34d" onclick="sbGoTo('m34','design')">  <span class="sb-mod-b">M3·4</span>Cap. Portante</button>
+        <button class="sb-mod" id="sbm-m67d" onclick="sbGoTo('m67','design')">  <span class="sb-mod-b">M6·7</span>Asentamientos</button>
+        <button class="sb-mod" id="sbm-m10d" onclick="sbGoTo('m10','design')">  <span class="sb-mod-b">M10</span>Reporte</button>
+        <button class="sb-mod" id="sbm-m11d" onclick="sbGoTo('m11','design')">  <span class="sb-mod-b">M11</span>Vista 3D</button>
       </div>
     </div>
   </div>
@@ -497,10 +581,14 @@ body{padding-bottom:56px}
     </div>
     <div class="hdr-title" onclick="goHome()" title="← Volver al inicio" style="cursor:pointer;transition:opacity .15s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity=''">STRATEX</div>
   </div>
-  <div class="hdr-actions">
+  <div class="hdr-actions" style="display:flex;align-items:center;gap:.5rem">
+    <button class="dark-toggle" onclick="toggleDark()" id="dark-btn" title="Modo oscuro/claro (Ctrl+D)">🌙 Oscuro</button>
     <button class="btn btn-success" onclick="calcAll()">⚡ Calcular Todo</button>
   </div>
 </div>
+<div id="calc-progress-wrap"><div id="calc-progress"></div></div>
+<div id="toast-container"></div>
+<button id="fab-calc" onclick="calcAll()" title="Calcular Todo (Ctrl+Enter)">⚡</button>
 
 
 <!-- ========== KPI BAR ========== -->
@@ -535,28 +623,68 @@ body{padding-bottom:56px}
 
 <!-- ========== PROFUNDAS — VERIFICACIÓN ========== -->
 <div id="panel-prof-verif" class="panel">
-  <div class="wlc-wrap">
-    <div style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:12px;padding:2rem 2.25rem;margin-bottom:1.75rem;color:#fff;display:flex;align-items:flex-start;gap:1.2rem">
-      <div style="font-size:2.2rem;line-height:1;flex-shrink:0">🔩</div>
-      <div>
-        <div style="font-size:1.15rem;font-weight:900;line-height:1.25;margin-bottom:.28rem">Verificación — Cimentaciones Profundas</div>
-        <div style="font-size:.78rem;opacity:.8;line-height:1.65">Análisis de capacidad axial de pilotes aislados y grupos, distribución de cargas por fuste y punta, y verificación de asentamiento del sistema.</div>
+  <div class="grid2">
+    <!-- Inputs -->
+    <div>
+      <div class="card">
+        <div class="card-title"><span class="badge-module" style="background:#7c3aed">P·GEO</span>Geometría del Pilote</div>
+        <div class="pile-input-grid">
+          <div class="fg">
+            <label>Tipo de pilote<span class="help-tip" data-help="Hincado: mayor capacidad por fuste (mayor Ks). Barrenado: menor perturbación del suelo.">?</span></label>
+            <select id="pile-type" onchange="updPile('type',this.value)">
+              <option value="bored">Barrenado (concreto vaciado)</option>
+              <option value="driven">Hincado (prefabricado)</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Diámetro D (m)<span class="help-tip" data-help="Típico: 0.3–0.6 m barrenado · 0.25–0.45 m hincado. Afecta área de punta y perímetro de fuste.">?</span></label>
+            <input type="number" id="pile-D" value="0.45" step="0.05" min="0.2" max="2" oninput="updPile('D',+this.value)">
+          </div>
+          <div class="fg">
+            <label>Longitud L (m)<span class="help-tip" data-help="Longitud embebida en el suelo. El pilote atraviesa estratos blandos y se apoya en el estrato competente.">?</span></label>
+            <input type="number" id="pile-L" value="12" step="1" min="3" max="60" oninput="updPile('L',+this.value)">
+          </div>
+          <div class="fg">
+            <label>FS objetivo<span class="help-tip" data-help="NSR-10: FS ≥ 2.5 para pilotes con ensayos de carga. FS ≥ 3.0 sin ensayos. Recomendado: 2.5.">?</span></label>
+            <input type="number" id="pile-FS" value="2.5" step="0.5" min="1.5" max="5" oninput="updPile('FS',+this.value)">
+          </div>
+          <div class="fg">
+            <label>Carga axial Q (kN)<span class="help-tip" data-help="Carga de servicio por pilote aislado. Para grupo: carga total / n_pilotes.">?</span></label>
+            <input type="number" id="pile-Q" value="500" step="50" min="10" oninput="updPile('Q',+this.value)">
+          </div>
+          <div class="fg">
+            <label>Sondeo de referencia</label>
+            <select id="pile-bh" onchange="updPile('bhId',+this.value)"></select>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0">
+        <div class="card-title"><span class="badge-module" style="background:#7c3aed">P·GRP</span>Grupo de Pilotes</div>
+        <div class="pile-input-grid">
+          <div class="fg">
+            <label>Filas (m)<span class="help-tip" data-help="Número de filas del grupo en planta. Grupo 2×2 = 2 filas × 2 columnas = 4 pilotes.">?</span></label>
+            <input type="number" id="pile-rows" value="1" step="1" min="1" max="10" oninput="updPile('n_rows',+this.value)">
+          </div>
+          <div class="fg">
+            <label>Columnas (n)<span class="help-tip" data-help="Número de columnas del grupo en planta.">?</span></label>
+            <input type="number" id="pile-cols" value="1" step="1" min="1" max="10" oninput="updPile('n_cols',+this.value)">
+          </div>
+          <div class="fg">
+            <label>Espaciamiento s/D<span class="help-tip" data-help="Relación separación/diámetro. Mínimo recomendado: 3D hincados, 2.5D barrenados. Típico: 3D.">?</span></label>
+            <input type="number" id="pile-sD" value="3" step="0.5" min="2" max="8" oninput="updPile('sD',+this.value)">
+          </div>
+          <div class="fg" style="display:flex;align-items:flex-end">
+            <div class="info" style="padding:.4rem .65rem;font-size:.72rem;margin:0" id="pile-group-info">1 pilote aislado</div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:.75rem">
+          <button class="btn btn-primary" style="font-size:.9rem;padding:.6rem 2rem;background:linear-gradient(135deg,#7c3aed,#6d28d9)" onclick="calcPiles()">🔩 Calcular Pilotes</button>
+        </div>
       </div>
     </div>
-    <div style="border:1.5px dashed rgba(124,58,237,.4);border-radius:12px;padding:2.5rem 2rem;text-align:center;background:rgba(124,58,237,.04)">
-      <div style="font-size:3rem;margin-bottom:1rem;opacity:.5">⚙️</div>
-      <div style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:.5rem">Módulo en construcción</div>
-      <div style="font-size:.82rem;color:var(--g500);line-height:1.7;max-width:480px;margin:0 auto .75rem">
-        Este módulo implementará la verificación de pilotes por los métodos de Meyerhof y Vesic para capacidad de punta, y adhesión/fricción de Tomlinson para resistencia por fuste, estrato a estrato.
-      </div>
-      <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-top:1rem">
-        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Pilotes aislados</span>
-        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Grupos de pilotes</span>
-        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Resistencia por fuste</span>
-        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Resistencia de punta</span>
-        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Eficiencia de grupo</span>
-        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Asentamiento del grupo</span>
-      </div>
+    <!-- Results -->
+    <div id="res-pile-verif">
+      <div class="empty-state">Define geometría y presiona "🔩 Calcular Pilotes".<br><small style="opacity:.6">Usa M2 para definir el perfil estratigráfico primero.</small></div>
     </div>
   </div>
 </div>
@@ -623,32 +751,32 @@ body{padding-bottom:56px}
 <!-- ========== BIENVENIDA DISEÑO ========== -->
 <div id="panel-welcome-design" class="panel">
   <div class="wlc-wrap">
-    <div class="wlc-hero" style="background:linear-gradient(135deg,#0d1f3c,#d97706)">
-      <div class="wlc-hero-icon">⚙️</div>
+    <div class="wlc-hero" style="background:linear-gradient(135deg,#0a1220,#d97706 180%)">
+      <div class="wlc-hero-icon">⚡</div>
       <div>
-        <div class="wlc-hero-title">Modo Diseño — Cimentaciones Superficiales</div>
-        <div class="wlc-hero-sub">STRATEX propone dimensiones óptimas de zapatas para cada columna. Ingresa las cargas y criterios de diseño — el software verifica capacidad portante y asentamientos automáticamente.</div>
+        <div class="wlc-hero-title">Diseño Automático de Cimentaciones</div>
+        <div class="wlc-hero-sub">Ingresa las cargas por columna y los criterios de diseño. STRATEX evaluará el perfil de suelo y determinará automáticamente si se requieren cimentaciones superficiales o profundas — y diseñará la solución óptima.</div>
       </div>
     </div>
     <div class="wlc-steps">
       <div class="wlc-step" style="border-top-color:var(--amber)">
         <div class="wlc-step-num" style="background:var(--amber)">1</div>
         <div class="wlc-step-title">M2 · Perfil de Suelo</div>
-        <div class="wlc-step-desc">Define el perfil estratigráfico en M2 Sondeos. Requerido antes de diseñar.</div>
+        <div class="wlc-step-desc">Define estratigrafía y NF en M2. El motor usará el sondeo más desfavorable.</div>
       </div>
       <div class="wlc-step" style="border-top-color:var(--amber)">
         <div class="wlc-step-num" style="background:var(--amber)">2</div>
         <div class="wlc-step-title">Cargas y Criterios</div>
-        <div class="wlc-step-desc">Ingresa cargas por columna, FS objetivo y asentamiento admisible.</div>
+        <div class="wlc-step-desc">Ingresa Q por columna, FS objetivo, S admisible y tiempo de análisis.</div>
       </div>
       <div class="wlc-step" style="border-top-color:var(--amber)">
         <div class="wlc-step-num" style="background:var(--amber)">3</div>
-        <div class="wlc-step-title">Optimización</div>
-        <div class="wlc-step-desc">STRATEX propone dimensiones óptimas y genera el reporte de verificación completo.</div>
+        <div class="wlc-step-title">Diseño Automático</div>
+        <div class="wlc-step-desc">STRATEX decide el tipo de cimentación óptimo y propone las dimensiones con verificación completa.</div>
       </div>
     </div>
     <div class="wlc-start-row">
-      <button class="btn btn-amber" style="font-size:.95rem;padding:.75rem 2.5rem" onclick="initDesignLayout()">Iniciar →</button>
+      <button class="btn btn-amber" style="font-size:.95rem;padding:.75rem 2.5rem" onclick="initDesignLayout()">⚡ Iniciar Diseño →</button>
     </div>
   </div>
 </div>
@@ -850,6 +978,7 @@ body{padding-bottom:56px}
     <div id="des-results" style="display:none">
       <div class="card">
         <div class="card-title"><span class="badge-module">Resultado</span>Propuesta Óptima — Resumen</div>
+        <div id="auto-decision-badge" style="margin-bottom:.5rem"></div>
         <div id="des-results-inner"></div>
         <div style="margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--g200);display:flex;gap:.5rem;flex-wrap:wrap">
           <button class="btn btn-primary" onclick="showTab('m34')">→ M3-M4 Capacidad Portante</button>
@@ -2120,11 +2249,16 @@ function calcAll(){
   results._critBH=boreholes.length>1&&results._mode==='critical'?
     Object.values(assignment)[0]?.name:'—';
 
+  startProgress();
   drawM1Plan();
   renderM34();renderM5();renderM67();renderM8();renderM9();renderM10();
   requestAnimationFrame(initOrUpdate3D);
   updateKPIBar();
   updateModuleStatus();
+  endProgress();
+  const vf=footings.filter(f=>results[f.id]);
+  const allOk=vf.length&&vf.every(f=>results[f.id]?.mey?.ok&&results[f.id]?.S_total<=25);
+  toast(`Cálculo completado · ${vf.length} zapata${vf.length!==1?'s':''} · ${allOk?'Todas cumplen NSR-10 ✅':'Revisar resultados ⚠️'}`,allOk?'success':'warn',4000);
   showTab('m34');
   setTimeout(()=>document.getElementById('res-m34')?.scrollIntoView({behavior:'smooth',block:'start'}),280);
 }
@@ -4545,6 +4679,264 @@ function toggleDesDetail(i){
 }
 
 showStartModal();
+
+/* ════════════════════════════════════════════════════════
+   DARK MODE
+════════════════════════════════════════════════════════ */
+function toggleDark(){
+  const dark=document.body.classList.toggle('dark');
+  const btn=document.getElementById('dark-btn');
+  if(btn) btn.innerHTML=dark?'☀️ Claro':'🌙 Oscuro';
+  try{localStorage.setItem('stratex_dark',dark?'1':'0');}catch(e){}
+}
+(function(){
+  try{
+    if(localStorage.getItem('stratex_dark')==='1'||
+      (window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches&&localStorage.getItem('stratex_dark')==null)){
+      document.body.classList.add('dark');
+      const btn=document.getElementById('dark-btn');
+      if(btn) btn.innerHTML='☀️ Claro';
+    }
+  }catch(e){}
+})();
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='d'&&!e.shiftKey){
+    if(e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();toggleDark();}
+  }
+});
+
+/* ════════════════════════════════════════════════════════
+   TOAST SYSTEM
+════════════════════════════════════════════════════════ */
+function toast(msg,type='info',ms=3500){
+  const c=document.getElementById('toast-container');if(!c)return;
+  const t=document.createElement('div');
+  t.className=`toast toast-${type}`;t.innerHTML=msg;
+  c.appendChild(t);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('show')));
+  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),320);},ms);
+}
+
+/* ════════════════════════════════════════════════════════
+   PROGRESS BAR
+════════════════════════════════════════════════════════ */
+let _progInterval=null;
+function startProgress(){
+  const w=document.getElementById('calc-progress-wrap');
+  const p=document.getElementById('calc-progress');
+  if(!w||!p)return;
+  w.style.display='block';p.style.width='0%';
+  let pct=0;
+  _progInterval=setInterval(()=>{
+    pct=Math.min(pct+Math.random()*12,88);
+    p.style.width=pct+'%';
+  },120);
+}
+function endProgress(){
+  clearInterval(_progInterval);
+  const w=document.getElementById('calc-progress-wrap');
+  const p=document.getElementById('calc-progress');
+  if(!p)return;
+  p.style.width='100%';
+  setTimeout(()=>{if(w)w.style.display='none';p.style.width='0%';},500);
+}
+
+/* ════════════════════════════════════════════════════════
+   MODULE SLIDE TRANSITION
+════════════════════════════════════════════════════════ */
+/* merged sbGoTo override: transitions + pile BH refresh */
+(function(){
+  const orig=sbGoTo;
+  window.sbGoTo=function(panelId,mode){
+    orig(panelId,mode);
+    const panel=document.getElementById('panel-'+panelId);
+    if(panel){panel.classList.add('panel-entering');setTimeout(()=>panel.classList.remove('panel-entering'),420);}
+    if(panelId==='prof-verif') setTimeout(renderPileBhSelect,60);
+  };
+})();
+
+/* ════════════════════════════════════════════════════════
+   PILE VERIFICATION ENGINE
+════════════════════════════════════════════════════════ */
+let pileConfig={type:'bored',D:.45,L:12,FS:2.5,Q:500,n_rows:1,n_cols:1,sD:3,bhId:null};
+
+function updPile(key,val){
+  pileConfig[key]=val;
+  const rows=pileConfig.n_rows,cols=pileConfig.n_cols;
+  const nTotal=rows*cols;
+  const info=document.getElementById('pile-group-info');
+  if(info) info.textContent=nTotal===1?'1 pilote aislado':`Grupo ${rows}×${cols} = ${nTotal} pilotes · s=${(pileConfig.sD*pileConfig.D).toFixed(2)} m`;
+}
+
+function renderPileBhSelect(){
+  const sel=document.getElementById('pile-bh');if(!sel)return;
+  sel.innerHTML=boreholes.map(b=>`<option value="${b.id}"${b.id===pileConfig.bhId?' selected':''}>${b.name}</option>`).join('');
+  if(!pileConfig.bhId&&boreholes.length) pileConfig.bhId=boreholes[0].id;
+}
+
+/* Tomlinson α (1957) for cohesive skin friction */
+function tollinsonAlpha(cu){
+  if(cu<=25) return 1.0;
+  if(cu<=70) return 0.5+0.5*(25/cu);
+  return 0.5;
+}
+
+/* Meyerhof Nq* for pile tip resistance in granular */
+function pileNqStar(phiDeg){
+  // Meyerhof (1963/1976) pile bearing capacity factor
+  const phi=phiDeg*Math.PI/180;
+  return Math.exp(Math.PI*Math.tan(phi))*Math.pow(Math.tan(Math.PI/4+phi/2),2)*2.5;
+}
+
+function calcPiles(){
+  renderPileBhSelect();
+  const bh=boreholes.find(b=>b.id===pileConfig.bhId)||boreholes[0];
+  if(!bh||!bh.strata.length){toast('Define el perfil estratigráfico en M2 primero.','warn');return;}
+  const {D,L,FS,Q,n_rows,n_cols,sD,type}=pileConfig;
+  const nTotal=n_rows*n_cols;
+  const s=sD*D; // center-to-center spacing
+  const perim=Math.PI*D; // pile perimeter
+  const Atip=Math.PI*D*D/4; // pile tip area
+  const Nf=bh.Nf??999;
+  // limiting unit friction and tip
+  const qsFricLimit=type==='driven'?100:80; // kPa
+  const qtipLimit=type==='driven'?8000:4000; // kPa
+
+  let depth=0,Qs=0,Qp=0;
+  const layers=[];
+  for(const s_obj of bh.strata){
+    const zt=depth,zb=depth+s_obj.h;depth=zb;
+    if(zb<=0) continue;
+    if(zt>=L) break;
+    const z1=Math.max(zt,0),z2=Math.min(zb,L);
+    if(z2<=z1) continue;
+    const h=z2-z1,zm=(z1+z2)/2;
+    const sv0=sigmaVo(zm,Nf,bh.strata).sv_eff;
+    let fs=0,mechanism='';
+    if(s_obj.type==='cohesive'||s_obj.type==='organico'){
+      const cu=s_obj.c>0?s_obj.c:10; // undrained shear strength
+      const alpha=tollinsonAlpha(cu);
+      fs=Math.min(alpha*cu,qsFricLimit);
+      mechanism=`α·cu = ${alpha.toFixed(2)}×${cu} kPa`;
+    } else {
+      // Granular — β method
+      const phi=deg2rad(s_obj.phi);
+      const Ks=type==='driven'?(1-Math.sin(phi))*1.4:(1-Math.sin(phi));
+      const delta=phi*0.75; // friction angle pile-soil
+      fs=Math.min(Math.max(0,sv0)*Ks*Math.tan(delta),qsFricLimit);
+      mechanism=`Ks·σ'v·tan(δ) = ${Ks.toFixed(2)}×${sv0.toFixed(1)}×${Math.tan(delta).toFixed(3)}`;
+    }
+    const Qs_i=fs*perim*h;
+    Qs+=Qs_i;
+    layers.push({name:s_obj.name,type:s_obj.type,h:+(h.toFixed(2)),fs:+fs.toFixed(1),Qs_i:+Qs_i.toFixed(1),mechanism});
+  }
+
+  // Tip resistance at pile base
+  const tipStrat=bh.strata.find((s_obj,i)=>{
+    let d=0;for(let j=0;j<i;j++)d+=bh.strata[j].h;return d+s_obj.h>=L;
+  })||bh.strata[bh.strata.length-1];
+  if(tipStrat){
+    if(tipStrat.type==='cohesive'||tipStrat.type==='organico'){
+      Qp=Math.min(9*tipStrat.c,qtipLimit)*Atip;
+    } else {
+      const sv0tip=sigmaVo(L,Nf,bh.strata).sv_eff;
+      const Nq_star=pileNqStar(tipStrat.phi);
+      Qp=Math.min(Nq_star*sv0tip,qtipLimit)*Atip;
+    }
+  }
+
+  const Qu=Qs+Qp;
+  const fs_pile=Q>0?Qu/Q:0;
+  const ok=fs_pile>=FS;
+
+  // Group efficiency — Converse-Labarre
+  const theta=Math.atan(D/s)*(180/Math.PI);
+  const E_cla=1-(theta/90)*((n_cols-1)*n_rows+(n_rows-1)*n_cols)/(n_rows*n_cols);
+  const E=nTotal===1?1:Math.max(0.5,Math.min(1,E_cla));
+  const Q_group_ind=E*nTotal*Qu;
+  // Block capacity
+  const Lg=n_cols===1?D:(n_cols-1)*s+D;
+  const Bg=n_rows===1?D:(n_rows-1)*s+D;
+  const perimeter_g=2*(Lg+Bg);
+  const avgFs=layers.length>0?layers.reduce((a,l)=>a+l.fs*l.h,0)/L:0;
+  const Q_group_block=perimeter_g*L*avgFs+Lg*Bg*Qp/Atip;
+  const Q_group=nTotal===1?Qu:Math.min(Q_group_ind,Q_group_block);
+  const Q_total=nTotal*Q;
+  const FS_group=Q_total>0?Q_group/Q_total:0;
+
+  // Render results
+  const res=document.getElementById('res-pile-verif');if(!res)return;
+  res.innerHTML=`
+  <div class="pile-cap-bar">
+    <div class="pile-cap-item"><div class="pile-cap-val">${n(Qs,0)}</div><div class="pile-cap-lbl">Qs fuste (kN)</div></div>
+    <div class="pile-cap-item"><div class="pile-cap-val">${n(Qp,0)}</div><div class="pile-cap-lbl">Qp punta (kN)</div></div>
+    <div class="pile-cap-item"><div class="pile-cap-val">${n(Qu,0)}</div><div class="pile-cap-lbl">Qu total (kN)</div></div>
+    <div class="pile-cap-item"><div class="pile-cap-val ${ok?'':''}">FS ${n(fs_pile,2)}</div><div class="pile-cap-lbl">${ok?'✅ CUMPLE':'❌ FALLA'}</div></div>
+  </div>
+  <div class="pile-fs-bar ${ok?'ok':'fail'}">
+    <div class="pile-fs-num">${n(fs_pile,2)}</div>
+    <div>Factor de Seguridad — ${ok?`CUMPLE FS ≥ ${FS}`:`FALLA — FS < ${FS}`}<br><small style="font-weight:500;font-size:.72rem">Qu = ${n(Qu,0)} kN · Q aplicada = ${n(Q,0)} kN · Pilote ${type==='driven'?'hincado':'barrenado'} ∅${D}m × L${L}m</small></div>
+  </div>
+  <div class="card" style="padding:.9rem 1.1rem;margin-bottom:.5rem">
+    <div class="card-title" style="font-size:.82rem;margin-bottom:.6rem">Resistencia por fuste — estrato a estrato</div>
+    <table class="pile-layer-tbl">
+      <tr><th>Estrato</th><th>h(m)</th><th>fs(kPa)</th><th>Qs_i(kN)</th><th>Mecanismo</th></tr>
+      ${layers.map(l=>`<tr><td>${l.name}</td><td class="num">${l.h}</td><td class="num">${l.fs}</td><td class="num">${l.Qs_i}</td><td style="font-size:.65rem;color:var(--g500)">${l.mechanism}</td></tr>`).join('')}
+      <tr style="font-weight:700;background:rgba(124,58,237,.06)"><td colspan="3">Qs Total</td><td class="num">${n(Qs,0)}</td><td></td></tr>
+    </table>
+    <div style="font-size:.74rem;margin-top:.4rem;color:var(--g500)">Resistencia de punta: <strong>${n(Qp,0)} kN</strong> — ${tipStrat?.type==='cohesive'?`9·cu = 9×${tipStrat.c} kPa`:`Nq*·σ'v = ${pileNqStar(tipStrat?.phi||30).toFixed(0)}×${sigmaVo(L,Nf,bh.strata).sv_eff.toFixed(1)} kPa`} · Área punta: ${Atip.toFixed(4)} m²</div>
+  </div>
+  ${nTotal>1?`
+  <div class="pile-group-box">
+    <div class="pile-group-title">🏗 Análisis de Grupo ${n_rows}×${n_cols} = ${nTotal} pilotes · s = ${s.toFixed(2)} m (${sD}D)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.5rem;font-size:.75rem">
+      <div style="background:var(--g50);border-radius:6px;padding:.4rem .55rem"><div style="color:var(--g500);font-size:.62rem;text-transform:uppercase">Eficiencia (C-L)</div><div style="font-family:'JetBrains Mono',monospace;font-weight:700">${(E*100).toFixed(1)}%</div></div>
+      <div style="background:var(--g50);border-radius:6px;padding:.4rem .55rem"><div style="color:var(--g500);font-size:.62rem;text-transform:uppercase">Qg individual</div><div style="font-family:'JetBrains Mono',monospace;font-weight:700">${n(Q_group_ind,0)} kN</div></div>
+      <div style="background:var(--g50);border-radius:6px;padding:.4rem .55rem"><div style="color:var(--g500);font-size:.62rem;text-transform:uppercase">Qg bloque</div><div style="font-family:'JetBrains Mono',monospace;font-weight:700">${n(Q_group_block,0)} kN</div></div>
+    </div>
+    <div style="font-size:.76rem"><strong>Q grupo = min(Qg_ind, Qg_bloque) = ${n(Q_group,0)} kN</strong> · Q total aplicada = ${n(Q_total,0)} kN</div>
+    <div class="pile-fs-bar ${FS_group>=FS?'ok':'fail'}" style="margin-top:.5rem;padding:.45rem .8rem">
+      <div class="pile-fs-num" style="font-size:1.25rem">${n(FS_group,2)}</div>
+      <div>FS grupo — ${FS_group>=FS?'CUMPLE':'FALLA'}</div>
+    </div>
+  </div>`:''}
+  `;
+  toast(`Pilote calculado: Qu = ${n(Qu,0)} kN · FS = ${n(fs_pile,2)}`,ok?'success':'warn');
+}
+
+/* ════════════════════════════════════════════════════════
+   AUTO-DECISION EN DISEÑO
+════════════════════════════════════════════════════════ */
+const _origRunDesign=window.runDesign;
+(function(){
+  const orig=typeof runDesign!=='undefined'?runDesign:null;
+  if(!orig) return;
+  window.runDesign=function(){
+    if(!boreholes.length||boreholes.every(b=>!b.strata.length)){
+      toast('Define el perfil estratigráfico en M2 primero.','warn');return;
+    }
+    startProgress();
+    // Let original run design first
+    orig();
+    // After design runs, check if superficials worked
+    setTimeout(()=>{
+      endProgress();
+      const vf=footings.filter(f=>results[f.id]);
+      if(!vf.length) return;
+      const allOk=vf.every(f=>results[f.id]?.mey?.ok&&results[f.id]?.S_total<=25);
+      const decEl=document.getElementById('auto-decision-badge');
+      if(decEl){
+        if(allOk){
+          decEl.innerHTML=`<div class="decision-badge sup">🏗 Superficiales — Solución viable</div><div class="decision-rationale">El perfil de suelo satisface los criterios establecidos con cimentaciones superficiales (zapatas). Todos los factores de seguridad cumplen FS ≥ ${document.getElementById('des-FS')?.value||3} y los asentamientos están dentro del límite admisible.</div>`;
+        } else {
+          decEl.innerHTML=`<div class="decision-badge deep">🔩 Profundas — Se recomienda evaluar pilotes</div><div class="decision-rationale">Las cimentaciones superficiales no satisfacen los criterios de capacidad portante o asentamientos con las dimensiones óptimas encontradas. Se recomienda verificar cimentaciones profundas en el módulo de Verificación → Profundas.</div>`;
+        }
+      }
+      toast(allOk?'Diseño completado: superficiales viables ✅':'Diseño: se recomienda evaluar profundas 🔩',allOk?'success':'warn');
+    },200);
+  };
+})();
+
 
 /* ── Autosave a localStorage cada 45 segundos ── */
 (function(){
