@@ -29,10 +29,41 @@ nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-co
 .nav-cta{background:var(--mid)!important;color:#fff!important;padding:.38rem .95rem;border-radius:7px;transition:all .2s!important}
 .nav-cta:hover{background:var(--blue)!important;transform:translateY(-1px);box-shadow:0 4px 16px rgba(37,99,235,.3)!important}
 
-/* ── Hero — dark ── */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;overflow:hidden;background:#070e1e}
+/* ── Hero — dark split ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:0 3.5rem;overflow:hidden;background:#070e1e;text-align:left}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.hero-inner{position:relative;z-index:2;max-width:960px}
+.hero-inner{position:relative;z-index:2;max-width:1200px;width:100%;display:grid;grid-template-columns:1.1fr .95fr;gap:4rem;align-items:center;padding:5rem 0}
+.hero-left{}
+.hero-right{display:flex;justify-content:flex-end}
+.cta-group{justify-content:flex-start}
+/* Mock software panel */
+@keyframes heroMockReveal{from{opacity:0;transform:translateX(28px) scale(.96)}to{opacity:1;transform:none}}
+.hero-mock{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.05);background:#0b1628;animation:heroMockReveal .9s .55s cubic-bezier(.22,1,.36,1) both;width:100%;max-width:400px}
+.hm-hdr{background:#060d1a;padding:.52rem .9rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.hm-dots{display:flex;gap:.28rem}
+.hm-dot{width:8px;height:8px;border-radius:50%}
+.hm-bar-title{font-family:'Fira Code',monospace;font-size:.54rem;color:rgba(255,255,255,.3);margin-left:.3rem;flex:1}
+.hm-tabs-row{display:flex;background:#080f1d;border-bottom:1px solid rgba(255,255,255,.05);overflow:hidden}
+.hm-tab{padding:.34rem .65rem;font-size:.57rem;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.35px;text-transform:uppercase;border-bottom:2px solid transparent;white-space:nowrap}
+.hm-tab.on{color:#fbbf24;border-bottom-color:#fbbf24;background:rgba(251,191,36,.05)}
+.hm-body{padding:.85rem .9rem;display:flex;flex-direction:column;gap:.6rem}
+.hm-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.8rem .9rem}
+.hm-card-name{font-size:.64rem;font-weight:700;color:rgba(255,255,255,.65);margin-bottom:.65rem;display:flex;align-items:center;gap:.4rem}
+.hm-tag{background:rgba(59,130,246,.2);color:#93c5fd;border-radius:3px;padding:.04rem .3rem;font-size:.52rem;font-family:'Fira Code',monospace;font-weight:700}
+.hm-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;margin-bottom:.6rem}
+.hm-metric{background:rgba(0,0,0,.3);border-radius:7px;padding:.5rem .42rem;text-align:center}
+.hm-val{font-family:'Fira Code',monospace;font-size:.76rem;font-weight:700;color:#e2e8f0;line-height:1;margin-bottom:.16rem}
+.hm-val.ok{color:#4ade80}.hm-val.warn{color:#fbbf24}
+.hm-lbl{font-size:.48rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.4px}
+.hm-nsr{display:flex;align-items:center;justify-content:center;gap:.35rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.18);border-radius:6px;padding:.32rem;font-size:.58rem;font-weight:700;color:#4ade80;letter-spacing:.3px}
+.hm-factors{display:grid;grid-template-columns:repeat(3,1fr);gap:.28rem;margin-top:.52rem}
+.hm-factor{background:rgba(0,0,0,.3);border-radius:4px;padding:.25rem .32rem;font-family:'Fira Code',monospace;font-size:.5rem;color:rgba(255,255,255,.4);text-align:center}
+.hm-factor span{color:rgba(251,191,36,.8);font-weight:700;display:block;font-size:.62rem}
+.hm-minibar{display:flex;align-items:center;gap:.5rem;margin-top:.6rem;padding:.42rem .6rem;background:rgba(0,0,0,.25);border-radius:7px;border:1px solid rgba(255,255,255,.05)}
+.hm-minibar-label{font-size:.54rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.hm-minibar-track{flex:1;height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.hm-minibar-fill{height:100%;border-radius:3px;transition:width 1.5s .8s ease}
+.hm-minibar-val{font-family:'Fira Code',monospace;font-size:.62rem;font-weight:700;white-space:nowrap}
 .eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(212,130,10,.1);border:1px solid rgba(212,130,10,.25);border-radius:20px;padding:.3rem 1rem;font-size:.67rem;color:var(--amberL);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeUp .6s ease both}
 .eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--amberL);animation:pulse 2s ease infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
@@ -245,12 +276,22 @@ nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
 
 /* ── Responsive ── */
 @media(max-width:900px){
+  .hero{padding:0 1.5rem}
+  .hero-inner{grid-template-columns:1fr;padding:4rem 0 2rem;gap:2.5rem}
+  .hero-right{justify-content:center}
+  .hero-mock{max-width:100%}
+  .hero-title{font-size:clamp(4rem,12vw,7rem)}
+  .cta-group{justify-content:center}
+  .hero-left{text-align:center}
+  .eyebrow{display:inline-flex}
   .workflow::before{display:none}
   .workflow{flex-wrap:wrap;gap:1.5rem}
   .wf-step{flex:1 0 38%;min-width:110px}
   .showcase-body{grid-template-columns:1fr}
   .showcase-sidebar{display:none}
   .features-grid,.modos-grid,.v2-cards{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr 1fr}
+  .bento-cell.c3,.bento-cell.c4{grid-column:span 2}
   .viz-two{grid-template-columns:1fr}
   .viz-side{border-left:none;border-top:1px solid var(--g200)}
   footer{grid-template-columns:1fr;gap:1.5rem}
@@ -290,20 +331,84 @@ nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-inner">
-    <div class="eyebrow">
-      <div class="eyebrow-dot"></div>
-      Software Geotécnico · Cimentaciones Superficiales · v1.0
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="eyebrow">
+        <div class="eyebrow-dot"></div>
+        Software Geotécnico · Cimentaciones Superficiales · v1.0
+      </div>
+      <h1 class="hero-title">STRA<span class="outline">TEX</span></h1>
+      <p class="hero-tagline">
+        Verifica la <strong>capacidad portante</strong> y los <strong>asentamientos</strong> de tus zapatas,<br>
+        o deja que STRATEX proponga las <strong>dimensiones óptimas</strong> automáticamente.<br>
+        Sin ábacos. Sin interpolación. <strong>Fórmulas cerradas</strong> verificadas contra NSR-10.
+      </p>
+      <div class="cta-group">
+        <a href="app.html" class="btn-primary"><span>⚡</span> Abrir Software</a>
+        <a href="app.html" download="STRATEX_v1.0.html" class="btn-secondary"><span>⬇</span> Descargar .html</a>
+      </div>
     </div>
-    <h1 class="hero-title">STRA<span class="outline">TEX</span></h1>
-    <p class="hero-tagline">
-      Verifica la <strong>capacidad portante</strong> y los <strong>asentamientos</strong> de tus zapatas,<br>
-      o deja que STRATEX proponga las <strong>dimensiones óptimas</strong> automáticamente.<br>
-      Sin ábacos. Sin interpolación. <strong>Fórmulas cerradas</strong> verificadas contra NSR-10.<br>
-      <span style="font-size:.85em;opacity:.65;font-style:normal;letter-spacing:.5px">Disponible en línea · abre desde cualquier navegador sin instalación.</span>
-    </p>
-    <div class="cta-group">
-      <a href="app.html" class="btn-primary"><span>⚡</span> Abrir Software</a>
-      <a href="app.html" download="STRATEX_v1.0.html" class="btn-secondary"><span>⬇</span> Descargar .html</a>
+    <!-- RIGHT — mock software panel -->
+    <div class="hero-right">
+      <div class="hero-mock">
+        <div class="hm-hdr">
+          <div class="hm-dots">
+            <div class="hm-dot" style="background:#ff5f57"></div>
+            <div class="hm-dot" style="background:#febc2e"></div>
+            <div class="hm-dot" style="background:#28c840"></div>
+          </div>
+          <div class="hm-bar-title">STRATEX — Modo Verificación · M3·4 Meyerhof</div>
+        </div>
+        <div class="hm-tabs-row">
+          <div class="hm-tab">M1</div><div class="hm-tab">M2</div>
+          <div class="hm-tab on">M3·4</div><div class="hm-tab">M5</div>
+          <div class="hm-tab">M6·7</div><div class="hm-tab">M8</div>
+        </div>
+        <div class="hm-body">
+          <div class="hm-card">
+            <div class="hm-card-name">
+              <span class="hm-tag">B2</span> 2.0 × 2.0 m · Df = 1.20 m · Q = 540 kN
+            </div>
+            <div class="hm-metrics">
+              <div class="hm-metric">
+                <div class="hm-val ok" id="hm-fs">3.42</div>
+                <div class="hm-lbl">Fact. Seg.</div>
+              </div>
+              <div class="hm-metric">
+                <div class="hm-val ok">18.3 mm</div>
+                <div class="hm-lbl">S total</div>
+              </div>
+              <div class="hm-metric">
+                <div class="hm-val">298.6 kPa</div>
+                <div class="hm-lbl">qu Meyerhof</div>
+              </div>
+            </div>
+            <div class="hm-nsr">✅ NSR-10 H.4 · CUMPLE · FS ≥ 3 · S ≤ 25 mm</div>
+            <div class="hm-factors">
+              <div class="hm-factor"><span>18.4</span>Nc</div>
+              <div class="hm-factor"><span>10.7</span>Nq</div>
+              <div class="hm-factor"><span>7.9</span>Nγ</div>
+              <div class="hm-factor"><span>1.25</span>sc</div>
+              <div class="hm-factor"><span>1.41</span>dq</div>
+              <div class="hm-factor"><span>0.88</span>iγ</div>
+            </div>
+          </div>
+          <div class="hm-minibar">
+            <span class="hm-minibar-label">FS vs límite</span>
+            <div class="hm-minibar-track">
+              <div class="hm-minibar-fill" style="width:68%;background:linear-gradient(90deg,#22c55e,#4ade80)"></div>
+            </div>
+            <span class="hm-minibar-val" style="color:#4ade80">3.42 / 5.0</span>
+          </div>
+          <div class="hm-minibar">
+            <span class="hm-minibar-label">S vs 25 mm</span>
+            <div class="hm-minibar-track">
+              <div class="hm-minibar-fill" style="width:73%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
+            </div>
+            <span class="hm-minibar-val" style="color:#fbbf24">18.3 mm</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -376,40 +481,79 @@ nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
 <!-- FLUJO -->
 <section id="flujo">
   <div class="container">
-    <div class="section-label">Cómo funciona</div>
-    <h2 class="section-title">Del perfil de suelo al reporte,<br>en cinco pasos</h2>
-    <p class="section-desc">El flujo está encadenado: cada módulo alimenta automáticamente al siguiente. Presiona "Calcular Todo" una vez y STRATEX ejecuta el análisis completo en segundos.</p>
-    <div class="workflow">
-      <div class="wf-step">
-        <div class="wf-num">01</div>
-        <span class="wf-icon">🗺️</span>
-        <div class="wf-title">Sondeos y Estratos</div>
-        <div class="wf-desc">Perfil estratigráfico completo: c, φ, γ, Es, e₀, Cc, Cs, σ'p, cv — estrato a estrato</div>
+    <div class="section-label reveal">Cómo funciona</div>
+    <h2 class="section-title reveal">Del perfil de suelo al reporte,<br>en cinco pasos</h2>
+    <p class="section-desc reveal">El flujo está encadenado: cada módulo alimenta automáticamente al siguiente. Hover sobre cada paso para ver las ecuaciones. Presiona "Calcular Todo" y STRATEX ejecuta todo en segundos.</p>
+    <div class="iflow">
+      <div class="iflow-nodes">
+        <div class="iflow-node" onmouseenter="activateFlow(this)" onmouseleave="deactivateFlow(this)">
+          <div class="iflow-num">01</div>
+          <span class="iflow-icon">🗺️</span>
+          <div class="iflow-label">Datos de entrada</div>
+          <div class="iflow-sub">M1 Geometría · M2 Sondeos estratigráficos</div>
+          <div class="iflow-tooltip">
+            <strong style="color:#fbbf24">M1 + M2 — Entrada</strong><br>
+            B, L, Df, Q, β por zapata<br>
+            c, φ, γ, γsat, Es, μ, e₀, Cc, Cs, σ'p, cv por estrato<br>
+            <code>NF (m)</code> por sondeo · coordenadas X–Y
+          </div>
+        </div>
+        <div class="iflow-node" onmouseenter="activateFlow(this)" onmouseleave="deactivateFlow(this)">
+          <div class="iflow-num">02</div>
+          <span class="iflow-icon">📊</span>
+          <div class="iflow-label">Presiones efectivas</div>
+          <div class="iflow-sub">M3 σ'vo por integración acumulada</div>
+          <div class="iflow-tooltip">
+            <strong style="color:#fbbf24">M3 — σ'vo(z)</strong><br>
+            <code>σ'vo = Σγᵢ·hᵢ − u</code><br>
+            <code>u = γw · max(0, z − NF)</code><br>
+            γ' = γsat − 9.81 kN/m³ bajo NF
+          </div>
+        </div>
+        <div class="iflow-node" onmouseenter="activateFlow(this)" onmouseleave="deactivateFlow(this)">
+          <div class="iflow-num">03</div>
+          <span class="iflow-icon">⚡</span>
+          <div class="iflow-label">Capacidad portante</div>
+          <div class="iflow-sub">M4 Meyerhof · M5 Boussinesq</div>
+          <div class="iflow-tooltip">
+            <strong style="color:#fbbf24">M4 — Meyerhof (1963)</strong><br>
+            <code>qu = c·Nc·sc·dc·ic + q·Nq·sq·dq·iq + ½γB·Nγ·sγ·dγ·iγ</code><br>
+            <code>Nq = eᵖᵗᵃⁿᶠ · tan²(45+φ/2)</code><br>
+            9 factores · 3 casos NF
+          </div>
+        </div>
+        <div class="iflow-node" onmouseenter="activateFlow(this)" onmouseleave="deactivateFlow(this)">
+          <div class="iflow-num">04</div>
+          <span class="iflow-icon">🏗️</span>
+          <div class="iflow-label">Asentamientos</div>
+          <div class="iflow-sub">M6 Schmertmann · M7 Consolidación · M8 β NSR-10</div>
+          <div class="iflow-tooltip">
+            <strong style="color:#fbbf24">M6 — Schmertmann (1978)</strong><br>
+            <code>Si = C₁·C₂·Δq·Σ(Iz/Es·Δz)</code><br>
+            <strong style="color:#fbbf24">M7 — Consolidación Terzaghi</strong><br>
+            <code>Sc = Cc·H/(1+e₀)·log[(σ'v0+Δσ)/σ'v0]</code><br>
+            <strong style="color:#fbbf24">M8 — NSR-10 H.4.2</strong><br>
+            <code>β = δ/L ≤ 1/250</code>
+          </div>
+        </div>
+        <div class="iflow-node" onmouseenter="activateFlow(this)" onmouseleave="deactivateFlow(this)">
+          <div class="iflow-num">05</div>
+          <span class="iflow-icon">📄</span>
+          <div class="iflow-label">Reporte y visualización</div>
+          <div class="iflow-sub">M9 Gráficas · M10 PDF · M11 3D</div>
+          <div class="iflow-tooltip">
+            <strong style="color:#fbbf24">M9–M11 — Salidas</strong><br>
+            Heatmap IDW · Boussinesq xsec<br>
+            Planta 2D a escala · Vista 3D Three.js<br>
+            Memoria PDF · Exportación Excel
+          </div>
+        </div>
       </div>
-      <div class="wf-step">
-        <div class="wf-num">02</div>
-        <span class="wf-icon">📐</span>
-        <div class="wf-title">Geometría o Cargas</div>
-        <div class="wf-desc">En verificación: B, L, Df, β. En diseño: cargas por columna, FS y S<sub>adm</sub></div>
-      </div>
-      <div class="wf-step">
-        <div class="wf-num">03</div>
-        <span class="wf-icon">⚡</span>
-        <div class="wf-title">Calcular Todo</div>
-        <div class="wf-desc">Meyerhof · Boussinesq · Schmertmann-Hartman · Timoshenko-Janbu + Giroud · Consolidación NC/OC</div>
-      </div>
-      <div class="wf-step">
-        <div class="wf-num">04</div>
-        <span class="wf-icon">✅</span>
-        <div class="wf-title">Diagnóstico NSR-10</div>
-        <div class="wf-desc">FS ≥ 3 · S ≤ 25 mm · β ≤ 1/300. Semáforo automático por módulo y por zapata</div>
-      </div>
-      <div class="wf-step">
-        <div class="wf-num">05</div>
-        <span class="wf-icon">📄</span>
-        <div class="wf-title">Exportar</div>
-        <div class="wf-desc">Memoria de cálculo completa a PDF · todos los valores intermedios · exportación a Excel</div>
-      </div>
+      <!-- SVG connector line -->
+      <svg class="iflow-svg" viewBox="0 0 100 4" preserveAspectRatio="none">
+        <line x1="10" y1="2" x2="90" y2="2" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <line id="iflow-progress" x1="10" y1="2" x2="10" y2="2" stroke="#2563eb" stroke-width="2" stroke-linecap="round" style="transition:x2 .35s ease"/>
+      </svg>
     </div>
   </div>
 </section>
@@ -613,30 +757,110 @@ nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
 
 <div class="divider"></div>
 
-<!-- MÓDULOS -->
+<!-- MÓDULOS BENTO -->
 <section id="modulos">
   <div class="container">
-    <div class="section-label">Arquitectura del software</div>
-    <h2 class="section-title">11 módulos integrados,<br>flujo de cálculo encadenado</h2>
-    <p class="section-desc">Cada módulo implementa sus ecuaciones en JavaScript puro mediante fórmulas cerradas. Los resultados se propagan automáticamente entre módulos al presionar "Calcular Todo".</p>
-    <div class="modules-grid">
-      <div class="module-card"><div class="mod-tag">M1</div><div class="mod-title">Geometría de Zapatas</div><div class="mod-desc">B, L, Df, carga Q, momentos Mx/My, tipo (cuadrada/rectangular/corrida), ángulo β, posición X–Y en planta</div></div>
-      <div class="module-card"><div class="mod-tag">M2</div><div class="mod-title">Perfil Estratigráfico</div><div class="mod-desc">N estratos: c, φ, γ, γsat, Es, μ, e₀, Cc, Cs, σ'p, cv, USCS. Nivel freático Nf. Múltiples sondeos con coordenadas</div></div>
-      <div class="module-card"><div class="mod-tag">M3</div><div class="mod-title">Presiones Efectivas</div><div class="mod-desc">σ'vo(z) por integración acumulada capa a capa. Corrección automática γ' = γsat − γw bajo el nivel freático</div></div>
-      <div class="module-card"><div class="mod-tag">M4</div><div class="mod-title">Meyerhof Completo</div><div class="mod-desc">Nc, Nq, Nγ + 9 factores (forma, profundidad, inclinación). Parámetros ponderados en zona de falla [Df, Df+B]. 3 casos freático</div></div>
-      <div class="module-card"><div class="mod-tag">M5</div><div class="mod-title">Boussinesq Analítico</div><div class="mod-desc">Δσz(z) por fórmula cerrada rectangular con superposición de 4 esquinas. Manejo del caso arctan con argumento negativo</div></div>
-      <div class="module-card"><div class="mod-tag">M6</div><div class="mod-title">Asentamiento Granular</div><div class="mod-desc">Schmertmann-Hartman (1978): perfil Iz(z) analítico, factor C1 de alivio de esfuerzos, factor C2 de fluencia en t años</div></div>
-      <div class="module-card"><div class="mod-tag">M7</div><div class="mod-title">Asentamiento Cohesivo</div><div class="mod-desc">Timoshenko-Janbu + Is de Giroud (1968) para Si inmediato. Consolidación Terzaghi NC/OC casos A y B con Δσz de Boussinesq</div></div>
-      <div class="module-card"><div class="mod-tag">M8</div><div class="mod-title">Asentamiento Diferencial</div><div class="mod-desc">δ = |Si − Sj| entre todos los pares de zapatas. Distorsión β = δ/L. Semáforo automático NSR-10 H.4.2: β ≤ 1/300</div></div>
-      <div class="module-card"><div class="mod-tag blue">M9</div><div class="mod-title">Visualizaciones</div><div class="mod-desc">Perfil estratigráfico con textura · planta de cimentación · diagrama Δσz vs z · mapa de calor de asentamientos (Chart.js)</div></div>
-      <div class="module-card"><div class="mod-tag blue">M10</div><div class="mod-title">Reporte de Cálculo</div><div class="mod-desc">Memoria completa exportable a PDF y Excel. Incluye todos los valores intermedios: factores BCF, 9 factores Meyerhof, Δσz, asentamientos diferenciados por método</div></div>
-      <div class="module-card">
-        <div style="display:flex;align-items:center;margin-bottom:.5rem">
-          <div class="mod-tag green" style="margin-bottom:0">M11</div>
-          <span class="badge-beta-idx" title="Módulo en versión Beta — modos Mapa Δσz, Bulbos σz y Distribución completos en STRATEX v2.0">BETA</span>
+    <div class="section-label reveal">Arquitectura del software</div>
+    <h2 class="section-title reveal">11 módulos · un solo flujo</h2>
+    <p class="section-desc reveal">Cada módulo implementa sus ecuaciones en JavaScript puro. Los resultados se propagan automáticamente al presionar "Calcular Todo". Hover para ver el output real de cada módulo.</p>
+    <div class="bento">
+      <!-- M4 grande dark — la estrella del software -->
+      <div class="bento-cell dark c3 r2" style="background:linear-gradient(135deg,#0d1f3c 0%,#1a3d7c 100%)">
+        <div class="bento-tag">M4 · NÚCLEO</div>
+        <div class="bento-title" style="font-size:1.05rem;margin-bottom:.5rem">Meyerhof (1963)<br>Capacidad portante</div>
+        <div class="bento-desc" style="margin-bottom:1rem">qu = c·Nc·sc·dc·ic + q·Nq·sq·dq·iq + ½γB·Nγ·sγ·dγ·iγ<br><br>9 factores de corrección · 3 casos nivel freático · parámetros ponderados en zona de falla</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem">
+          <div style="background:rgba(255,255,255,.08);border-radius:7px;padding:.5rem;text-align:center">
+            <div style="font-family:'Fira Code',monospace;font-size:.9rem;font-weight:700;color:#fbbf24">18.4</div>
+            <div style="font-size:.55rem;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:.1rem">Nc</div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:7px;padding:.5rem;text-align:center">
+            <div style="font-family:'Fira Code',monospace;font-size:.9rem;font-weight:700;color:#fbbf24">10.7</div>
+            <div style="font-size:.55rem;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:.1rem">Nq</div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:7px;padding:.5rem;text-align:center">
+            <div style="font-family:'Fira Code',monospace;font-size:.9rem;font-weight:700;color:#fbbf24">7.92</div>
+            <div style="font-size:.55rem;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:.1rem">Nγ</div>
+          </div>
+          <div style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);border-radius:7px;padding:.5rem;text-align:center;grid-column:span 2">
+            <div style="font-family:'Fira Code',monospace;font-size:.88rem;font-weight:700;color:#4ade80">3.42 ✅</div>
+            <div style="font-size:.55rem;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:.1rem">Factor de Seguridad</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:.5rem;text-align:center">
+            <div style="font-family:'Fira Code',monospace;font-size:.88rem;font-weight:700;color:#e2e8f0">Caso 2</div>
+            <div style="font-size:.55rem;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:.1rem">NF</div>
+          </div>
         </div>
-        <div class="mod-title">Vista 3D Interactiva</div>
-        <div class="mod-desc">Modelo Three.js con estratos a escala real, zapatas a su Df, animación de asentamiento progresivo y tres modos: Mapa Δσz, Bulbos σz y Distribución de presiones</div>
+      </div>
+      <!-- M1+M2 -->
+      <div class="bento-cell c2">
+        <div class="bento-tag">M1 · M2</div>
+        <div class="bento-title">Geometría + Perfil</div>
+        <div class="bento-desc">Zapatas B, L, Df, Q, β · N estratos por sondeo · c, φ, γ, Es, Cc, Cs, σ'p, cv · NF · coordenadas X–Y</div>
+        <div style="display:flex;gap:.4rem;margin-top:.75rem;flex-wrap:wrap">
+          <span style="font-size:.62rem;background:#f0f7ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:4px;padding:.12rem .4rem;font-family:'Fira Code',monospace">12 zapatas</span>
+          <span style="font-size:.62rem;background:#f0f7ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:4px;padding:.12rem .4rem;font-family:'Fira Code',monospace">3 sondeos</span>
+          <span style="font-size:.62rem;background:#fefce8;border:1px solid #fde68a;color:#92400e;border-radius:4px;padding:.12rem .4rem;font-family:'Fira Code',monospace">5 estratos</span>
+        </div>
+      </div>
+      <!-- M8 NSR -->
+      <div class="bento-cell" style="background:linear-gradient(135deg,#064e3b,#065f46);border-color:transparent;color:#fff">
+        <div class="bento-tag" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2);color:#fff">M8 · NSR-10</div>
+        <div class="bento-title" style="color:#fff">Distorsión angular</div>
+        <div style="font-family:'Fira Code',monospace;font-size:1.6rem;font-weight:700;color:#4ade80;margin:.5rem 0 .15rem">2.8‰</div>
+        <div style="font-size:.68rem;color:rgba(255,255,255,.6)">β = δ/L ≤ 1/250 (4.0‰) ✅</div>
+      </div>
+      <!-- M5 Boussinesq -->
+      <div class="bento-cell c2">
+        <div class="bento-tag">M5 · Boussinesq</div>
+        <div class="bento-title">Distribución de esfuerzo Δσz</div>
+        <div class="bento-desc">Fórmula cerrada rectangular · superposición 4 esquinas · perfil Δσz(z) completo</div>
+        <div style="margin-top:.75rem;display:flex;gap:.35rem;align-items:center">
+          <div style="flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,#1e40af,#3b82f6,#93c5fd,#dbeafe);opacity:.8"></div>
+          <span style="font-size:.6rem;color:var(--g500);font-family:'Fira Code',monospace">0 → 120 kPa</span>
+        </div>
+      </div>
+      <!-- M6+M7 -->
+      <div class="bento-cell amber c2">
+        <div class="bento-tag">M6 · M7</div>
+        <div class="bento-title">Asentamientos</div>
+        <div class="bento-desc" style="margin-bottom:.75rem">Schmertmann-Hartman (1978) granulares · Timoshenko-Janbu + Giroud · Consolidación Terzaghi NC/OC</div>
+        <div style="display:flex;gap:.5rem">
+          <div style="flex:1;background:rgba(255,255,255,.12);border-radius:7px;padding:.45rem;text-align:center">
+            <div style="font-family:'Fira Code',monospace;font-size:.88rem;font-weight:700;color:#fff">12.4 mm</div>
+            <div style="font-size:.54rem;color:rgba(255,255,255,.55);text-transform:uppercase">Si granular</div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,.12);border-radius:7px;padding:.45rem;text-align:center">
+            <div style="font-family:'Fira Code',monospace;font-size:.88rem;font-weight:700;color:#fff">5.9 mm</div>
+            <div style="font-size:.54rem;color:rgba(255,255,255,.55);text-transform:uppercase">Sc cohesivo</div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,.18);border-radius:7px;padding:.45rem;text-align:center;border:1px solid rgba(255,255,255,.25)">
+            <div style="font-family:'Fira Code',monospace;font-size:.88rem;font-weight:700;color:#fff">18.3 mm</div>
+            <div style="font-size:.54rem;color:rgba(255,255,255,.7);text-transform:uppercase">S total ✅</div>
+          </div>
+        </div>
+      </div>
+      <!-- M3 -->
+      <div class="bento-cell">
+        <div class="bento-tag">M3</div>
+        <div class="bento-title">σ'vo</div>
+        <div class="bento-desc">Integración acumulada · γ' = γsat − 9.81 bajo NF</div>
+        <div style="font-family:'Fira Code',monospace;font-size:.72rem;color:var(--g500);margin-top:.6rem;line-height:1.8">
+          z=0.5m: <span style="color:var(--navy);font-weight:700">8.25 kPa</span><br>
+          z=1.5m: <span style="color:var(--navy);font-weight:700">25.6 kPa</span><br>
+          z=3.5m: <span style="color:var(--navy);font-weight:700">41.2 kPa</span>
+        </div>
+      </div>
+      <!-- M9+M10+M11 -->
+      <div class="bento-cell c2" style="background:var(--g900);border-color:rgba(255,255,255,.08)">
+        <div class="bento-tag" style="background:rgba(124,58,237,.2);border-color:rgba(124,58,237,.3);color:#a78bfa">M9 · M10 · M11</div>
+        <div class="bento-title" style="color:#e2e8f0">Visualización · Reporte · 3D</div>
+        <div class="bento-desc" style="color:#64748b">Heatmap IDW · Boussinesq xsec · planta 2D · Three.js r128 · PDF · Excel</div>
+        <div style="display:flex;gap:.35rem;margin-top:.75rem">
+          <span style="font-size:.6rem;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);color:#a78bfa;border-radius:4px;padding:.1rem .38rem">Chart.js 4</span>
+          <span style="font-size:.6rem;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);color:#a78bfa;border-radius:4px;padding:.1rem .38rem">Three.js r128</span>
+          <span style="font-size:.6rem;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);color:#a78bfa;border-radius:4px;padding:.1rem .38rem">Canvas 2D</span>
+        </div>
       </div>
     </div>
   </div>
@@ -678,18 +902,65 @@ nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
 
 <div class="divider"></div>
 
-<!-- FEATURES -->
+<!-- FEATURES BENTO -->
 <section id="features">
   <div class="container">
-    <div class="section-label">Características del software</div>
-    <h2 class="section-title">Motor de cálculo completo,<br>interfaz de ingeniería</h2>
-    <div class="features-grid">
-      <div class="feat"><div class="feat-icon fi-amber">⚙️</div><div><div class="feat-title">Modo Diseño con optimización automática</div><div class="feat-desc">Dado un conjunto de cargas y criterios (FS, S<sub>adm</sub>), STRATEX itera sobre Df y B para encontrar la zapata de mínimo volumen que satisface capacidad portante y asentamientos simultáneamente.</div></div></div>
-      <div class="feat"><div class="feat-icon fi-blue">🧮</div><div><div class="feat-title">Selección automática de método de asentamiento</div><div class="feat-desc">Identifica si cada estrato en la zona de influencia es granular (→ Schmertmann-Hartman) o cohesivo (→ Timoshenko-Janbu + consolidación), sin intervención del usuario.</div></div></div>
-      <div class="feat"><div class="feat-icon fi-blue">📍</div><div><div class="feat-title">Asignación sondeo–zapata por proximidad</div><div class="feat-desc">Con coordenadas X–Y en los sondeos, STRATEX asigna automáticamente el perfil de suelo más cercano a cada zapata. Sin coordenadas, usa el sondeo más desfavorable.</div></div></div>
-      <div class="feat"><div class="feat-icon fi-amber">📐</div><div><div class="feat-title">3 casos de nivel freático (Meyerhof)</div><div class="feat-desc">Corrección automática de γ* según posición del NF relativa a Df, Df+B o fuera de la zona de influencia. Se aplica al término Nγ con interpolación lineal.</div></div></div>
-      <div class="feat"><div class="feat-icon fi-green">✅</div><div><div class="feat-title">Verificación NSR-10 completa</div><div class="feat-desc">FS ≥ 3, S ≤ 25 mm y β ≤ 1/300 verificados para cada zapata y cada par de zapatas. Diagnóstico visual con semáforo y márgenes porcentuales en M4, M7 y M8.</div></div></div>
-      <div class="feat"><div class="feat-icon fi-purple">🎮</div><div><div class="feat-title">Vista 3D animada (Three.js)</div><div class="feat-desc">Modelo interactivo con estratos a escala real, zapatas en su posición X–Y a su Df correcto, simulación animada del asentamiento progresivo y controles de órbita completos.</div></div></div>
+    <div class="section-label reveal">Características diferenciales</div>
+    <h2 class="section-title reveal">Motor de cálculo completo,<br>interfaz de ingeniería</h2>
+    <div class="bento" style="grid-template-columns:repeat(4,1fr)">
+      <!-- Optimización — grande -->
+      <div class="bento-cell dark c2" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)">
+        <div class="bento-ic">⚙️</div>
+        <div class="bento-tag">Modo Diseño</div>
+        <div class="bento-title">Optimización automática de dimensiones</div>
+        <div class="bento-desc">Define cargas y criterios (FS, S_adm). STRATEX itera Df × B para encontrar la zapata de mínimo volumen que satisface capacidad portante y asentamientos simultáneamente.</div>
+        <div style="margin-top:.9rem;display:grid;grid-template-columns:1fr 1fr;gap:.4rem">
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:.4rem .6rem;font-size:.62rem;color:rgba(255,255,255,.55)">Barrido Df: <span style="color:#fbbf24;font-weight:700">0.5–3.0 m</span></div>
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:.4rem .6rem;font-size:.62rem;color:rgba(255,255,255,.55)">Barrido B: <span style="color:#fbbf24;font-weight:700">0.5–10 m</span></div>
+        </div>
+      </div>
+      <!-- Asignación automática -->
+      <div class="bento-cell">
+        <div class="bento-ic">📍</div>
+        <div class="bento-tag">Multi-sondeo</div>
+        <div class="bento-title">Asignación por proximidad</div>
+        <div class="bento-desc">Cada zapata usa el sondeo más cercano (distancia euclidiana X–Y). Sin coordenadas, aplica el sondeo más desfavorable.</div>
+      </div>
+      <!-- NSR-10 -->
+      <div class="bento-cell" style="background:#f0fdf4;border-color:#bbf7d0">
+        <div class="bento-ic">✅</div>
+        <div class="bento-tag" style="background:#dcfce7;border-color:#86efac;color:#15803d">NSR-10 H.4</div>
+        <div class="bento-title" style="color:#14532d">Verificación automática</div>
+        <div style="display:flex;flex-direction:column;gap:.3rem;margin-top:.6rem">
+          <div style="display:flex;justify-content:space-between;font-size:.7rem"><span style="color:#166534">FS ≥ 3.0</span><span style="font-family:'Fira Code',monospace;color:#15803d;font-weight:700">3.42 ✅</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.7rem"><span style="color:#166534">S ≤ 25 mm</span><span style="font-family:'Fira Code',monospace;color:#15803d;font-weight:700">18.3 ✅</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.7rem"><span style="color:#166534">β ≤ 1/250</span><span style="font-family:'Fira Code',monospace;color:#15803d;font-weight:700">2.8‰ ✅</span></div>
+        </div>
+      </div>
+      <!-- Nivel freático -->
+      <div class="bento-cell" style="background:#fffbeb;border-color:#fde68a">
+        <div class="bento-ic">💧</div>
+        <div class="bento-tag" style="background:#fef3c7;border-color:#fcd34d;color:#92400e">Nivel freático</div>
+        <div class="bento-title">3 casos Meyerhof</div>
+        <div class="bento-desc">Corrección automática de γ* según NF relativo a Df y Df+B. Reduce qu significativamente cuando NF es alto.</div>
+      </div>
+      <!-- Sin ábacos -->
+      <div class="bento-cell c2" style="background:var(--g900);border-color:rgba(255,255,255,.08)">
+        <div class="bento-tag" style="background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.3);color:#fbbf24">100% fórmulas cerradas</div>
+        <div class="bento-title" style="color:#e2e8f0">Sin ábacos · Sin interpolación</div>
+        <div class="bento-code">
+          <span class="kw">const</span> Nq = φ => Math.exp(π·tan(φ)) · tan²(45+φ/2)<br>
+          <span class="kw">const</span> Is = <span class="fn">giroud1968</span>(B,L) <span class="cm">// analítico</span><br>
+          <span class="kw">const</span> Iz = <span class="fn">schmertmann1978</span>(z,B,Df) <span class="cm">// exacto</span>
+        </div>
+      </div>
+      <!-- 3D -->
+      <div class="bento-cell" style="background:linear-gradient(135deg,#0d1829,#1e1b4b);border-color:rgba(124,58,237,.3)">
+        <div class="bento-ic">🧊</div>
+        <div class="bento-tag" style="background:rgba(124,58,237,.2);border-color:rgba(124,58,237,.3);color:#a78bfa">M11 · BETA</div>
+        <div class="bento-title" style="color:#e2e8f0">Vista 3D Three.js</div>
+        <div class="bento-desc" style="color:#64748b">Estratos a escala · zapatas en X–Y–Df · asentamiento animado · bulbos σz</div>
+      </div>
     </div>
   </div>
 </section>
@@ -793,6 +1064,46 @@ nav.scrolled{box-shadow:0 2px 24px rgba(13,31,60,.14)}
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);t++;requestAnimationFrame(draw);
   }
   window.addEventListener('resize',resize);resize();draw();
+})();
+
+/* ── Interactive workflow ── */
+function activateFlow(node){
+  node.classList.add('active');
+  const nodes=[...document.querySelectorAll('.iflow-node')];
+  const idx=nodes.indexOf(node);
+  const prog=document.getElementById('iflow-progress');
+  if(prog){
+    const pct=idx/(nodes.length-1)*80+10;
+    prog.setAttribute('x2',pct);
+  }
+}
+function deactivateFlow(node){
+  node.classList.remove('active');
+  const prog=document.getElementById('iflow-progress');
+  if(prog) prog.setAttribute('x2','10');
+}
+
+/* ── iflow CSS injection (responsive) ── */
+(function(){
+  const style=document.createElement('style');
+  style.textContent=`
+  .iflow-nodes{display:flex;align-items:flex-start;gap:0;position:relative;z-index:1;margin-top:2.5rem}
+  .iflow-node{flex:1;text-align:center;cursor:pointer;padding:0 .5rem;position:relative}
+  .iflow-num{width:44px;height:44px;border-radius:50%;border:2px solid var(--g300);background:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;font-family:'Fira Code',monospace;font-size:.7rem;font-weight:700;color:var(--g500);position:relative;z-index:2;transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+  .iflow-node.active .iflow-num,.iflow-node:hover .iflow-num{background:var(--mid);border-color:var(--mid);color:#fff;transform:scale(1.18);box-shadow:0 0 0 8px rgba(37,99,235,.12)}
+  .iflow-icon{font-size:1.15rem;margin-bottom:.35rem;display:block;transition:transform .28s cubic-bezier(.34,1.56,.64,1);line-height:1}
+  .iflow-node:hover .iflow-icon{transform:scale(1.28) rotate(-6deg)}
+  .iflow-label{font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:.2rem;transition:color .2s}
+  .iflow-node.active .iflow-label,.iflow-node:hover .iflow-label{color:var(--mid)}
+  .iflow-sub{font-size:.65rem;color:var(--g500);line-height:1.45;max-width:120px;margin:0 auto}
+  .iflow-tooltip{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;border-radius:10px;padding:.85rem 1rem;width:230px;font-size:.7rem;line-height:1.7;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;z-index:20;box-shadow:0 12px 40px rgba(0,0,0,.4);text-align:left;border:1px solid rgba(255,255,255,.08)}
+  .iflow-tooltip::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:11px;height:11px;background:var(--navy);border:1px solid rgba(255,255,255,.08);border-right:none;border-bottom:none}
+  .iflow-node:hover .iflow-tooltip,.iflow-node.active .iflow-tooltip{opacity:1}
+  .iflow-tooltip code{background:rgba(255,255,255,.12);padding:.03rem .32rem;border-radius:3px;font-family:'Fira Code',monospace;font-size:.88em}
+  .iflow-svg{position:relative;width:100%;height:4px;margin:0;overflow:visible;display:block;margin-top:-52px;z-index:0;pointer-events:none;padding:0 calc(10%)}
+  @media(max-width:700px){.iflow-nodes{flex-wrap:wrap;justify-content:center}.iflow-node{flex:1 0 38%;min-width:120px}.iflow-svg{display:none}}
+  `;
+  document.head.appendChild(style);
 })();
 
 /* ── Scroll reveal ── */

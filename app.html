@@ -254,38 +254,42 @@ input:hover:not(:focus),select:hover:not(:focus){border-color:var(--g400)}
 .modal-actions{display:flex;flex-direction:column;gap:.6rem}
 .modal-footer{margin-top:1.1rem;font-size:.67rem;color:var(--g500)}
 
-/* ── Sidebar ── */
-.sb-overlay{position:fixed;inset:0;background:rgba(13,31,60,.42);z-index:299;display:none;backdrop-filter:blur(2px)}
+/* ── Sidebar — dark command palette ── */
+.sb-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:299;display:none;backdrop-filter:blur(3px)}
 .sb-overlay.show{display:block}
-.sidebar{position:fixed;left:0;top:0;bottom:0;width:300px;background:#fff;box-shadow:4px 0 28px rgba(0,0,0,.22);z-index:300;transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:300px;background:#0d1829;box-shadow:6px 0 40px rgba(0,0,0,.5);z-index:300;transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;border-right:1px solid rgba(255,255,255,.07)}
 .sidebar.open{transform:translateX(0)}
-.sb-head{background:var(--navy);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.sb-head{background:linear-gradient(135deg,#0a1220,#0d1e38);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.08)}
 .sb-brand{display:flex;align-items:center;gap:.6rem;color:#fff}
-.sb-brand-name{font-size:.95rem;font-weight:800;letter-spacing:.4px}
-.sb-brand-sub{font-size:.6rem;opacity:.5;margin-top:1px}
-.sb-close{background:none;border:none;color:rgba(255,255,255,.55);font-size:1rem;cursor:pointer;padding:.22rem .4rem;border-radius:4px;line-height:1;transition:all .15s}
-.sb-close:hover{color:#fff;background:rgba(255,255,255,.14)}
-.sb-body{flex:1;overflow-y:auto;padding:1rem 1.1rem .75rem}
-.sb-lbl{font-size:.62rem;font-weight:800;color:var(--g500);text-transform:uppercase;letter-spacing:.65px;margin-bottom:.52rem;padding:0 .1rem}
-.sb-act{width:100%;text-align:left;padding:.58rem .9rem;border:1px solid var(--g200);border-radius:7px;background:#fff;cursor:pointer;font-size:.83rem;font-weight:600;color:var(--g700);display:flex;align-items:center;gap:.52rem;transition:all .15s;margin-bottom:.36rem}
-.sb-act:hover{border-color:var(--accent);color:var(--accent);background:#eff6ff}
+.sb-brand-name{font-size:.95rem;font-weight:800;letter-spacing:.4px;color:#f1f5f9}
+.sb-brand-sub{font-size:.6rem;color:rgba(255,255,255,.3);margin-top:1px}
+.sb-close{background:none;border:none;color:rgba(255,255,255,.35);font-size:1rem;cursor:pointer;padding:.22rem .4rem;border-radius:4px;line-height:1;transition:all .15s}
+.sb-close:hover{color:#fff;background:rgba(255,255,255,.12)}
+.sb-body{flex:1;overflow-y:auto;padding:1rem 1rem .75rem;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent}
+.sb-body::-webkit-scrollbar{width:4px}.sb-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+.sb-lbl{font-size:.58rem;font-weight:800;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.9px;margin-bottom:.52rem;padding:0 .1rem}
+.sb-act{width:100%;text-align:left;padding:.55rem .88rem;border:1px solid rgba(255,255,255,.08);border-radius:7px;background:rgba(255,255,255,.04);cursor:pointer;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:.52rem;transition:all .15s;margin-bottom:.32rem}
+.sb-act:hover{border-color:rgba(59,130,246,.5);color:#93c5fd;background:rgba(59,130,246,.1)}
 .sb-act.new-p{background:var(--mid);color:#fff;border-color:var(--mid)}
 .sb-act.new-p:hover{background:var(--blue);border-color:var(--blue)}
-.sb-hr{border:none;border-top:1px solid var(--g200);margin:.8rem 0}
-.sb-acc{border:1px solid var(--g200);border-radius:8px;overflow:hidden;margin-bottom:.52rem}
-.sb-acc-hd{padding:.65rem 1rem;background:var(--g50);display:flex;align-items:center;gap:.52rem;cursor:pointer;user-select:none;font-size:.82rem;font-weight:700;color:var(--g900);transition:background .15s}
-.sb-acc-hd:hover{background:var(--g100)}
-.sb-acc-hd .chv{margin-left:auto;font-size:.7rem;color:var(--g500);transition:transform .2s;flex-shrink:0}
+.sb-hr{border:none;border-top:1px solid rgba(255,255,255,.07);margin:.8rem 0}
+.sb-acc{border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;margin-bottom:.5rem;background:rgba(255,255,255,.02)}
+.sb-acc-hd{padding:.62rem 1rem;background:rgba(255,255,255,.04);display:flex;align-items:center;gap:.52rem;cursor:pointer;user-select:none;font-size:.81rem;font-weight:700;color:rgba(255,255,255,.75);transition:background .15s}
+.sb-acc-hd:hover{background:rgba(255,255,255,.08)}
+.sb-acc-hd .chv{margin-left:auto;font-size:.7rem;color:rgba(255,255,255,.3);transition:transform .2s;flex-shrink:0}
 .sb-acc.open .sb-acc-hd .chv{transform:rotate(180deg)}
-.sb-acc-bd{display:none;padding:.5rem .65rem;background:#fff;border-top:1px solid var(--g200)}
+.sb-acc-bd{display:none;padding:.45rem .6rem;background:rgba(0,0,0,.2);border-top:1px solid rgba(255,255,255,.05)}
 .sb-acc.open .sb-acc-bd{display:block}
-.sb-sub{width:100%;text-align:left;padding:.48rem .78rem;border:none;border-radius:6px;background:none;cursor:pointer;font-size:.81rem;color:var(--g700);display:flex;align-items:center;gap:.5rem;transition:background .15s;margin-bottom:.2rem}
-.sb-sub:hover{background:var(--g100);color:var(--navy)}
-.sb-sub.on{background:#eff6ff;color:var(--accent);font-weight:700}
-.sb-sub.lk{opacity:.5;cursor:not-allowed;color:var(--g500)}
+.sb-sub{width:100%;text-align:left;padding:.45rem .75rem;border:none;border-radius:6px;background:none;cursor:pointer;font-size:.8rem;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:.5rem;transition:background .15s;margin-bottom:.18rem}
+.sb-sub:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9)}
+.sb-sub.on{background:rgba(59,130,246,.18);color:#93c5fd;font-weight:700}
+.sb-sub.lk{opacity:.3;cursor:not-allowed}
 .sb-sub.lk:hover{background:none}
-.sb-v2{background:var(--g100);border-radius:6px;padding:.5rem .75rem;margin-top:.35rem;font-size:.71rem;color:var(--g500);display:flex;align-items:flex-start;gap:.42rem;line-height:1.5}
-.sb-foot{padding:.8rem 1.25rem;border-top:1px solid var(--g100);font-size:.63rem;color:var(--g500);flex-shrink:0;line-height:1.7}
+.sb-v2{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:.5rem .75rem;margin-top:.35rem;font-size:.7rem;color:rgba(255,255,255,.35);display:flex;align-items:flex-start;gap:.42rem;line-height:1.5}
+.sb-dev-lbl{margin-left:auto;font-size:.5rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(167,139,250,.7);background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.2);border-radius:3px;padding:.05rem .3rem;flex-shrink:0}
+.sb-prof-btn{border:1px dashed rgba(124,58,237,.25)!important;border-radius:6px;margin-top:.22rem;opacity:.75;transition:opacity .15s,background .15s!important}
+.sb-prof-btn:hover{opacity:1;background:rgba(124,58,237,.12)!important;border-color:rgba(167,139,250,.4)!important}
+.sb-foot{padding:.8rem 1.25rem;border-top:1px solid rgba(255,255,255,.07);font-size:.62rem;color:rgba(255,255,255,.25);flex-shrink:0;line-height:1.7}
 /* ── Design Mode ── */
 .des-hero{background:linear-gradient(130deg,var(--navy),#1a4d9e);color:#fff;border-radius:10px;padding:1.35rem 1.6rem;margin-bottom:1.1rem;display:flex;align-items:center;gap:1.1rem}
 .des-hero-ic{font-size:1.9rem;flex-shrink:0;line-height:1}
@@ -302,21 +306,21 @@ input:hover:not(:focus),select:hover:not(:focus){border-color:var(--g400)}
 .des-det-in{padding:.7rem 1rem;font-size:.76rem}
 .des-nf{background:#fff7ed;border:1px solid #fed7aa;border-radius:7px;padding:.6rem .95rem;font-size:.79rem;color:#92400e;display:flex;align-items:center;gap:.48rem}
 /* ── Sidebar nested module accordion ── */
-.sb-acc2{border-radius:6px;overflow:hidden;margin-bottom:.3rem}
-.sb-acc2-hd{padding:.5rem .75rem;background:var(--g50);display:flex;align-items:center;gap:.45rem;cursor:pointer;font-size:.81rem;font-weight:700;color:var(--g900);border-radius:6px;transition:background .15s;user-select:none}
-.sb-acc2-hd:hover{background:var(--g100)}
-.sb-acc2.open>.sb-acc2-hd{border-radius:6px 6px 0 0;background:var(--g100)}
-.chv2{margin-left:auto;font-size:.62rem;color:var(--g500);transition:transform .2s;flex-shrink:0}
+.sb-acc2{border-radius:7px;overflow:hidden;margin-bottom:.35rem;border:1px solid rgba(255,255,255,.06)}
+.sb-acc2-hd{padding:.52rem .8rem;background:rgba(255,255,255,.05);display:flex;align-items:center;gap:.45rem;cursor:pointer;font-size:.8rem;font-weight:700;color:rgba(255,255,255,.7);border-radius:7px;transition:background .15s;user-select:none}
+.sb-acc2-hd:hover{background:rgba(255,255,255,.1)}
+.sb-acc2.open>.sb-acc2-hd{border-radius:7px 7px 0 0;background:rgba(255,255,255,.08)}
+.chv2{margin-left:auto;font-size:.62rem;color:rgba(255,255,255,.3);transition:transform .2s;flex-shrink:0}
 .sb-acc2.open>.chv2,.sb-acc2.open .sb-acc2-hd .chv2{transform:rotate(180deg)}
-.sb-acc2-bd{display:none;background:#fff;border:1px solid var(--g200);border-top:none;border-radius:0 0 6px 6px;padding:.25rem .3rem}
+.sb-acc2-bd{display:none;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.05);border-top:none;border-radius:0 0 7px 7px;padding:.3rem .35rem}
 .sb-acc2.open>.sb-acc2-bd{display:block}
-.sb-acc2.on>.sb-acc2-hd{background:#eff6ff;color:var(--accent)}
-.sb-acc2.on>.sb-acc2-hd .chv2{color:var(--accent)}
-.sb-mod{width:100%;text-align:left;padding:.35rem .58rem;border:none;border-radius:5px;background:none;cursor:pointer;font-size:.77rem;color:var(--g700);display:flex;align-items:center;gap:.42rem;transition:background .12s;margin-bottom:.1rem}
-.sb-mod:hover{background:var(--g100);color:var(--navy)}
-.sb-mod.active{background:#eff6ff;color:var(--accent);font-weight:700}
-.sb-mod-b{font-size:.57rem;background:var(--g200);color:var(--g700);border-radius:3px;padding:.05rem .3rem;font-weight:700;font-family:'Courier New',monospace;flex-shrink:0;min-width:30px;text-align:center}
-.sb-mod.active .sb-mod-b{background:rgba(59,130,246,.18);color:var(--accent)}
+.sb-acc2.on>.sb-acc2-hd{background:rgba(59,130,246,.18);color:#93c5fd}
+.sb-acc2.on>.sb-acc2-hd .chv2{color:#93c5fd}
+.sb-mod{width:100%;text-align:left;padding:.38rem .6rem;border:none;border-radius:5px;background:none;cursor:pointer;font-size:.76rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:.42rem;transition:all .12s;margin-bottom:.1rem}
+.sb-mod:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.9)}
+.sb-mod.active{background:rgba(59,130,246,.2);color:#93c5fd;font-weight:700}
+.sb-mod-b{font-size:.55rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);border-radius:3px;padding:.05rem .3rem;font-weight:700;font-family:'JetBrains Mono',monospace;flex-shrink:0;min-width:30px;text-align:center}
+.sb-mod.active .sb-mod-b{background:rgba(59,130,246,.3);color:#93c5fd}
 
 /* ── Welcome panels ── */
 .wlc-wrap{max-width:740px;margin:2rem auto;padding:.5rem}
@@ -353,6 +357,35 @@ body{padding-bottom:56px}
 .mod-explain-body li{margin:.14rem 0}
 .mod-explain-body code{background:#dbeafe;border-radius:3px;padding:.04rem .32rem;font-size:.8em;font-family:monospace}
 .mod-explain-body em{color:#1e40af;font-style:normal;font-weight:600}
+
+/* ── KPI Bar ── */
+#kpi-bar{background:linear-gradient(135deg,#071428 0%,#0a1e3d 100%);border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:stretch;overflow:hidden;flex-shrink:0}
+#kpi-bar.visible{animation:kpiFadeIn .45s cubic-bezier(.22,1,.36,1) both}
+@keyframes kpiFadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.kpi-item{flex:1;padding:.52rem 1.1rem;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:.08rem}
+.kpi-label{font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:rgba(255,255,255,.35);white-space:nowrap}
+.kpi-value{font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:700;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .3s}
+.kpi-value.ok{color:#4ade80}.kpi-value.fail{color:#f87171}.kpi-value.warn{color:#fbbf24}
+.kpi-div{width:1px;background:rgba(255,255,255,.07);flex-shrink:0;margin:.35rem 0}
+.kpi-status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:.3rem;vertical-align:middle;flex-shrink:0}
+.kpi-status-dot.ok{background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.5)}
+.kpi-status-dot.fail{background:#f87171;box-shadow:0 0 6px rgba(248,113,113,.5)}
+.kpi-status-dot.warn{background:#fbbf24;box-shadow:0 0 6px rgba(251,191,36,.5)}
+
+/* ── Scorecard M34 ── */
+.scorecard{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.55rem;margin-bottom:1.1rem}
+.sc-cell{background:linear-gradient(160deg,var(--g50),#fff);border:1px solid var(--g200);border-radius:9px;padding:.7rem .85rem;transition:all .2s;position:relative;overflow:hidden}
+.sc-cell:hover{border-color:var(--accent);box-shadow:0 4px 14px rgba(37,99,235,.1);transform:translateY(-1px)}
+.sc-cell.ok-cell{border-left:3px solid #22c55e}
+.sc-cell.fail-cell{border-left:3px solid #ef4444}
+.sc-cell.warn-cell{border-left:3px solid #f59e0b}
+.sc-name{font-size:.72rem;font-weight:800;color:var(--navy);margin-bottom:.4rem}
+.sc-row{display:flex;justify-content:space-between;align-items:center;font-size:.67rem;margin-bottom:.1rem}
+.sc-key{color:var(--g500)}.sc-val{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--g900);font-size:.72rem}
+.sc-val.ok{color:#16a34a}.sc-val.fail{color:#dc2626}.sc-val.warn{color:#d97706}
+.sc-badge{position:absolute;top:.52rem;right:.6rem;font-size:.58rem;font-weight:800;padding:.1rem .35rem;border-radius:4px}
+.sc-badge.ok{background:#dcfce7;color:#15803d}
+.sc-badge.fail{background:#fee2e2;color:#b91c1c}
 
 /* ── Print ── */
 @media print{
@@ -391,16 +424,18 @@ body{padding-bottom:56px}
     </label>
     <button class="sb-act" onclick="loadDemoSb()">⚡ &nbsp;Proyecto demo</button>
     <hr class="sb-hr">
-    <div class="sb-lbl">Tipo de cimentación</div>
-    <div class="sb-acc open" id="sb-sup">
-      <div class="sb-acc-hd" onclick="toggleSbAcc('sb-sup')">
-        <span>🏗</span><span>Cimentaciones Superficiales</span><span class="chv">▼</span>
+    <div class="sb-lbl">Modo de trabajo</div>
+
+    <!-- ── VERIFICACIÓN ── -->
+    <div class="sb-acc" id="sb-verif-acc">
+      <div class="sb-acc-hd" onclick="startVerification()">
+        <span>🔬</span><span>Verificación</span><span class="chv">▼</span>
       </div>
       <div class="sb-acc-bd" style="padding:.4rem .45rem .5rem">
-        <!-- Verificación -->
-        <div class="sb-acc2" id="sb-verif-acc">
-          <div class="sb-acc2-hd" onclick="startVerification()">
-            <span>🔬</span><span>Verificación</span><span class="chv2">▼</span>
+        <!-- Superficiales -->
+        <div class="sb-acc2 open" id="sb-sup-verif">
+          <div class="sb-acc2-hd" onclick="toggleSbInner('sb-sup-verif')">
+            <span>🏗</span><span>Superficiales</span><span class="chv2">▼</span>
           </div>
           <div class="sb-acc2-bd">
             <button class="sb-mod" id="sbm-m1"   onclick="sbGoTo('m1','verif')">  <span class="sb-mod-b">M1</span>Geometría</button>
@@ -414,10 +449,25 @@ body{padding-bottom:56px}
             <button class="sb-mod" id="sbm-m11v" onclick="sbGoTo('m11','verif')"> <span class="sb-mod-b">M11</span>Vista 3D</button>
           </div>
         </div>
-        <!-- Diseño -->
-        <div class="sb-acc2" id="sb-design-acc">
-          <div class="sb-acc2-hd" onclick="startDesignMode()">
-            <span>⚙️</span><span>Diseño</span><span class="badge-beta" title="Módulo Diseño en versión Beta — optimización automática de zapatas completa en STRATEX v2.0" style="pointer-events:none">BETA</span><span class="chv2">▼</span>
+        <!-- Profundas -->
+        <button class="sb-mod sb-prof-btn" id="sbm-profv" onclick="sbGoTo('prof-verif','verif')">
+          <span class="sb-mod-b" style="background:rgba(124,58,237,.25);color:#c4b5fd">🔩</span>
+          <span>Profundas</span>
+          <span class="sb-dev-lbl">en desarrollo</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── DISEÑO AUTOMÁTICO ── -->
+    <div class="sb-acc" id="sb-design-acc">
+      <div class="sb-acc-hd" onclick="startDesignMode()">
+        <span>⚙️</span><span>Diseño Automático</span><span class="chv">▼</span>
+      </div>
+      <div class="sb-acc-bd" style="padding:.4rem .45rem .5rem">
+        <!-- Superficiales -->
+        <div class="sb-acc2 open" id="sb-sup-design">
+          <div class="sb-acc2-hd" onclick="toggleSbInner('sb-sup-design')">
+            <span>🏗</span><span>Superficiales</span><span class="chv2">▼</span>
           </div>
           <div class="sb-acc2-bd">
             <button class="sb-mod" id="sbm-des"  onclick="sbGoTo('design','design')"><span class="sb-mod-b">DIS</span>Optimización</button>
@@ -428,16 +478,12 @@ body{padding-bottom:56px}
             <button class="sb-mod" id="sbm-m11d" onclick="sbGoTo('m11','design')">  <span class="sb-mod-b">M11</span>Vista 3D</button>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="sb-acc" id="sb-pro">
-      <div class="sb-acc-hd" onclick="toggleSbAcc('sb-pro')">
-        <span>🔩</span><span>Cimentaciones Profundas</span><span class="chv">▼</span>
-      </div>
-      <div class="sb-acc-bd">
-        <div class="sb-sub lk">🔒 &nbsp;Verificación</div>
-        <div class="sb-sub lk">🔒 &nbsp;Diseño</div>
-        <div class="sb-v2">🔒 Pilotes y cimentaciones profundas — Disponible en <strong>&nbsp;STRATEX v2.0</strong></div>
+        <!-- Profundas -->
+        <button class="sb-mod sb-prof-btn" id="sbm-profd" onclick="sbGoTo('prof-design','design')">
+          <span class="sb-mod-b" style="background:rgba(124,58,237,.25);color:#c4b5fd">🔩</span>
+          <span>Profundas</span>
+          <span class="sb-dev-lbl">en desarrollo</span>
+        </button>
       </div>
     </div>
   </div>
@@ -457,7 +503,89 @@ body{padding-bottom:56px}
 </div>
 
 
+<!-- ========== KPI BAR ========== -->
+<div id="kpi-bar" style="display:none">
+  <div class="kpi-item">
+    <div class="kpi-label">FS mínimo</div>
+    <div class="kpi-value" id="kv-fs">—</div>
+  </div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item">
+    <div class="kpi-label">S máximo</div>
+    <div class="kpi-value" id="kv-s">—</div>
+  </div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item">
+    <div class="kpi-label">β crítico NSR-10</div>
+    <div class="kpi-value" id="kv-b">—</div>
+  </div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item">
+    <div class="kpi-label">Sistema analizado</div>
+    <div class="kpi-value" id="kv-sys">—</div>
+  </div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item">
+    <div class="kpi-label">Estado global</div>
+    <div class="kpi-value" id="kv-global">—</div>
+  </div>
+</div>
+
 <div class="content" id="app-content">
+
+<!-- ========== PROFUNDAS — VERIFICACIÓN ========== -->
+<div id="panel-prof-verif" class="panel">
+  <div class="wlc-wrap">
+    <div style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:12px;padding:2rem 2.25rem;margin-bottom:1.75rem;color:#fff;display:flex;align-items:flex-start;gap:1.2rem">
+      <div style="font-size:2.2rem;line-height:1;flex-shrink:0">🔩</div>
+      <div>
+        <div style="font-size:1.15rem;font-weight:900;line-height:1.25;margin-bottom:.28rem">Verificación — Cimentaciones Profundas</div>
+        <div style="font-size:.78rem;opacity:.8;line-height:1.65">Análisis de capacidad axial de pilotes aislados y grupos, distribución de cargas por fuste y punta, y verificación de asentamiento del sistema.</div>
+      </div>
+    </div>
+    <div style="border:1.5px dashed rgba(124,58,237,.4);border-radius:12px;padding:2.5rem 2rem;text-align:center;background:rgba(124,58,237,.04)">
+      <div style="font-size:3rem;margin-bottom:1rem;opacity:.5">⚙️</div>
+      <div style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:.5rem">Módulo en construcción</div>
+      <div style="font-size:.82rem;color:var(--g500);line-height:1.7;max-width:480px;margin:0 auto .75rem">
+        Este módulo implementará la verificación de pilotes por los métodos de Meyerhof y Vesic para capacidad de punta, y adhesión/fricción de Tomlinson para resistencia por fuste, estrato a estrato.
+      </div>
+      <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-top:1rem">
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Pilotes aislados</span>
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Grupos de pilotes</span>
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Resistencia por fuste</span>
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Resistencia de punta</span>
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Eficiencia de grupo</span>
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Asentamiento del grupo</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PROFUNDAS — DISEÑO ========== -->
+<div id="panel-prof-design" class="panel">
+  <div class="wlc-wrap">
+    <div style="background:linear-gradient(135deg,#1e1b4b,#7c3aed);border-radius:12px;padding:2rem 2.25rem;margin-bottom:1.75rem;color:#fff;display:flex;align-items:flex-start;gap:1.2rem">
+      <div style="font-size:2.2rem;line-height:1;flex-shrink:0">⚡</div>
+      <div>
+        <div style="font-size:1.15rem;font-weight:900;line-height:1.25;margin-bottom:.28rem">Diseño Automático — Cimentaciones Profundas</div>
+        <div style="font-size:.78rem;opacity:.8;line-height:1.65">Dadas las cargas por columna y el perfil estratigráfico, STRATEX selecciona el tipo de pilote, determina longitud y diámetro óptimos y genera el predimensionamiento completo.</div>
+      </div>
+    </div>
+    <div style="border:1.5px dashed rgba(124,58,237,.4);border-radius:12px;padding:2.5rem 2rem;text-align:center;background:rgba(124,58,237,.04)">
+      <div style="font-size:3rem;margin-bottom:1rem;opacity:.5">🏗️</div>
+      <div style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:.5rem">Módulo en construcción</div>
+      <div style="font-size:.82rem;color:var(--g500);line-height:1.7;max-width:480px;margin:0 auto .75rem">
+        El motor de Diseño Automático evaluará si las cimentaciones superficiales son viables. Si la capacidad portante superficial es insuficiente, propondrá automáticamente el sistema de pilotaje óptimo.
+      </div>
+      <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-top:1rem">
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Decisión automática superficial/profunda</span>
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Longitud óptima de pilote</span>
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Predimensionamiento de grupos</span>
+        <span style="font-size:.7rem;background:#ede9fe;border:1px solid #c4b5fd;color:#7c3aed;border-radius:5px;padding:.2rem .6rem">Verificación NSR-10 automática</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ========== BIENVENIDA VERIFICACIÓN ========== -->
 <div id="panel-welcome-verif" class="panel">
@@ -498,7 +626,7 @@ body{padding-bottom:56px}
     <div class="wlc-hero" style="background:linear-gradient(135deg,#0d1f3c,#d97706)">
       <div class="wlc-hero-icon">⚙️</div>
       <div>
-        <div class="wlc-hero-title">Modo Diseño — Cimentaciones Superficiales<span class="badge-beta" title="Módulo en versión Beta — optimización automática completa en STRATEX v2.0">BETA</span></div>
+        <div class="wlc-hero-title">Modo Diseño — Cimentaciones Superficiales</div>
         <div class="wlc-hero-sub">STRATEX propone dimensiones óptimas de zapatas para cada columna. Ingresa las cargas y criterios de diseño — el software verifica capacidad portante y asentamientos automáticamente.</div>
       </div>
     </div>
@@ -666,7 +794,7 @@ body{padding-bottom:56px}
 <!-- ========== M11 ========== -->
 <div id="panel-m11" class="panel">
   <div class="card">
-    <div class="card-title"><span class="badge-module">M11</span>Modelo 3D Interactivo — Cimentación y Perfil Estratigráfico<span class="badge-beta" title="Módulo en versión Beta — visualizaciones de mapa Δσz, bulbos y distribución completas en STRATEX v2.0">BETA</span></div>
+    <div class="card-title"><span class="badge-module">M11</span>Modelo 3D Interactivo — Cimentación y Perfil Estratigráfico</div>
     <div class="row no-print" style="gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.5rem">
       <button id="btn-m11-heat"  class="btn btn-ghost" onclick="setM11Mode('heat',this)"  title="Mapa de calor Δσz: discos de influencia coloreados por intensidad de esfuerzo">🌡 Mapa Δσz</button>
       <button id="btn-m11-bulbs" class="btn btn-ghost" onclick="setM11Mode('bulbs',this)" title="Bulbos de presión Boussinesq: iso-superficies al 50/35/20/10 % de q_aplicada">◉ Bulbos σz</button>
@@ -690,7 +818,7 @@ body{padding-bottom:56px}
     <div class="des-hero">
       <div class="des-hero-ic">⚙️</div>
       <div>
-        <div class="des-hero-t">Modo Diseño — Cimentaciones Superficiales<span class="badge-beta" title="Módulo en versión Beta — optimización automática completa en STRATEX v2.0">BETA</span></div>
+        <div class="des-hero-t">Modo Diseño — Cimentaciones Superficiales</div>
         <div class="des-hero-s">Ingresa las cargas por columna y los criterios. STRATEX propone las dimensiones óptimas, verifica capacidad portante y asentamientos, y genera el reporte completo automáticamente.</div>
       </div>
     </div>
@@ -802,8 +930,8 @@ let _pendingSwitchTo = null; // queued mode switch waiting for user confirmation
    NAVIGATION — sidebar-based
    ============================================================ */
 // verifMap / designMap: panelId → sidebar button id
-const _verifMap  = {m1:'sbm-m1',m2:'sbm-m2v',m34:'sbm-m34v',m5:'sbm-m5',m67:'sbm-m67v',m8:'sbm-m8',m9:'sbm-m9',m10:'sbm-m10v',m11:'sbm-m11v'};
-const _designMap = {design:'sbm-des',m2:'sbm-m2d',m34:'sbm-m34d',m67:'sbm-m67d',m10:'sbm-m10d',m11:'sbm-m11d'};
+const _verifMap  = {m1:'sbm-m1',m2:'sbm-m2v',m34:'sbm-m34v',m5:'sbm-m5',m67:'sbm-m67v',m8:'sbm-m8',m9:'sbm-m9',m10:'sbm-m10v',m11:'sbm-m11v','prof-verif':'sbm-profv'};
+const _designMap = {design:'sbm-des',m2:'sbm-m2d',m34:'sbm-m34d',m67:'sbm-m67d',m10:'sbm-m10d',m11:'sbm-m11d','prof-design':'sbm-profd'};
 
 const _verifSeq  = ['m1','m2','m34','m5','m67','m8','m9','m10','m11'];
 const _designSeq = ['design','m2','m34','m67','m10','m11'];
@@ -811,8 +939,9 @@ const _panelLabel = {
   m1:'M1 · Geometría', m2:'M2 · Sondeos', m34:'M3-M4 · Meyerhof',
   m5:'M5 · Boussinesq', m67:'M6-M7 · Asentamientos', m8:'M8 · Diferencial',
   m9:'M9 · Visualización', m10:'M10 · Reporte', m11:'M11 · Vista 3D',
-  design:'Diseño'
+  design:'Diseño', 'prof-verif':'Profundas · Verificación', 'prof-design':'Profundas · Diseño'
 };
+function toggleSbInner(id){ document.getElementById(id)?.classList.toggle('open'); }
 
 function renderModuleNav(panelId){
   const bar=document.getElementById('module-nav'); if(!bar)return;
@@ -1925,9 +2054,33 @@ function calcAll(){
   const FS=+document.getElementById('inp-FS').value;
   const t=+document.getElementById('inp-time').value;
 
-  if(!footings.length){alert('Define al menos una zapata (M1).');return;}
-  if(!boreholes.length){alert('Define al menos un sondeo (M2).');return;}
-  if(boreholes.some(b=>!b.strata.length)){alert('Todos los sondeos deben tener al menos un estrato.');return;}
+  // ── Validación de inputs ──
+  const errs=[];
+  if(!footings.length) errs.push('Define al menos una zapata en M1.');
+  else{
+    footings.forEach(f=>{
+      if(f.B<=0) errs.push(`Zapata ${f.name}: B debe ser > 0.`);
+      if(f.L<=0) errs.push(`Zapata ${f.name}: L debe ser > 0.`);
+      if(f.Df<0) errs.push(`Zapata ${f.name}: Df no puede ser negativo.`);
+      if(f.Q<=0) errs.push(`Zapata ${f.name}: La carga Q debe ser > 0.`);
+    });
+  }
+  if(!boreholes.length) errs.push('Define al menos un sondeo en M2.');
+  else{
+    boreholes.forEach(bh=>{
+      if(!bh.strata.length) errs.push(`Sondeo ${bh.name}: debe tener al menos un estrato.`);
+      bh.strata.forEach(s=>{ if(s.h<=0) errs.push(`Sondeo ${bh.name} · ${s.name}: espesor h debe ser > 0.`); });
+      const totalH=bh.strata.reduce((a,s)=>a+s.h,0);
+      const maxDf=Math.max(...footings.map(f=>f.Df),0);
+      if(totalH<maxDf) errs.push(`Sondeo ${bh.name}: profundidad total (${totalH.toFixed(1)} m) menor que el mayor Df (${maxDf.toFixed(1)} m).`);
+    });
+  }
+  if(FS<1||FS>10) errs.push('Factor de seguridad debe estar entre 1 y 10.');
+  if(errs.length){
+    const msg=errs.slice(0,5).join('\n')+(errs.length>5?`\n... y ${errs.length-5} error(es) más.`:'');
+    alert('⚠️ Errores en los datos de entrada:\n\n'+msg);
+    return;
+  }
 
   // Compute assignment
   assignment=computeAssignment();
@@ -1970,8 +2123,79 @@ function calcAll(){
   drawM1Plan();
   renderM34();renderM5();renderM67();renderM8();renderM9();renderM10();
   requestAnimationFrame(initOrUpdate3D);
+  updateKPIBar();
+  updateModuleStatus();
   showTab('m34');
   setTimeout(()=>document.getElementById('res-m34')?.scrollIntoView({behavior:'smooth',block:'start'}),280);
+}
+
+function updateModuleStatus(){
+  // Marca módulos con resultados con un punto verde en el sidebar
+  const done=Object.keys(results).filter(k=>k!=='_diff'&&k!=='_assign'&&k!=='_mode'&&k!=='_critBH').length>0;
+  const mods=['m34v','m5','m67v','m8','m9','m10v','m11v','m34d','m67d','m10d','m11d'];
+  mods.forEach(id=>{
+    const btn=document.getElementById('sbm-'+id);if(!btn)return;
+    if(!btn.querySelector('.sb-status-dot')){
+      const dot=document.createElement('span');
+      dot.className='sb-status-dot';
+      dot.style.cssText='display:inline-block;width:5px;height:5px;border-radius:50%;background:rgba(74,222,128,.7);margin-left:auto;flex-shrink:0;box-shadow:0 0 4px rgba(74,222,128,.5)';
+      btn.appendChild(dot);
+    }
+    const dot=btn.querySelector('.sb-status-dot');
+    dot.style.opacity=done?'1':'0';
+  });
+  // M1 y M2 siempre activos si hay datos
+  ['m1','m2v'].forEach(id=>{
+    const btn=document.getElementById('sbm-'+id);if(!btn)return;
+    const hasData=id==='m1'?footings.length>0:boreholes.length>0;
+    if(!btn.querySelector('.sb-status-dot')){
+      const dot=document.createElement('span');dot.className='sb-status-dot';
+      dot.style.cssText='display:inline-block;width:5px;height:5px;border-radius:50%;margin-left:auto;flex-shrink:0';
+      btn.appendChild(dot);
+    }
+    const dot=btn.querySelector('.sb-status-dot');
+    dot.style.background=hasData?'rgba(74,222,128,.7)':'rgba(255,255,255,.2)';
+    dot.style.opacity='1';
+  });
+}
+
+function updateKPIBar(){
+  const bar=document.getElementById('kpi-bar'); if(!bar) return;
+  const vf=footings.filter(f=>results[f.id]); if(!vf.length) return;
+  // FS
+  const fsList=vf.map(f=>{const m=results[f.id].mey;return m.q_app>0?m.qu/m.q_app:0;});
+  const minFS=Math.min(...fsList);
+  const kvFS=document.getElementById('kv-fs');
+  const fsOk=minFS>=3;
+  kvFS.innerHTML=`<span class="kpi-status-dot ${fsOk?'ok':'fail'}"></span>${n(minFS,2)}`;
+  kvFS.className='kpi-value '+(fsOk?'ok':'fail');
+  // S
+  const sList=vf.map(f=>results[f.id].S_total);
+  const maxS=Math.max(...sList);
+  const kvS=document.getElementById('kv-s');
+  const sOk=maxS<=25;
+  kvS.innerHTML=`<span class="kpi-status-dot ${sOk?'ok':'fail'}"></span>${n(maxS,1)} mm`;
+  kvS.className='kpi-value '+(sOk?'ok':'fail');
+  // β
+  const kvB=document.getElementById('kv-b');
+  const diff=results._diff;
+  if(diff&&diff.pairs.length){
+    const worst=diff.pairs.reduce((a,b)=>b.beta>a.beta?b:a);
+    const bOk=worst.ok;
+    kvB.innerHTML=`<span class="kpi-status-dot ${bOk?'ok':'fail'}"></span>${(worst.beta*1000).toFixed(2)}‰`;
+    kvB.className='kpi-value '+(bOk?'ok':'fail');
+  } else {
+    kvB.textContent='— (1 zapata)'; kvB.className='kpi-value';
+  }
+  // System
+  document.getElementById('kv-sys').textContent=`${vf.length} zapatas · ${boreholes.length} sondeo${boreholes.length!==1?'s':''}`;
+  document.getElementById('kv-sys').className='kpi-value';
+  // Global
+  const kvG=document.getElementById('kv-global');
+  const allOk=fsOk&&sOk&&(!diff||!diff.pairs.length||diff.pairs.every(p=>p.ok));
+  kvG.innerHTML=`<span class="kpi-status-dot ${allOk?'ok':'fail'}"></span>${allOk?'CUMPLE NSR-10':'REVISAR'}`;
+  kvG.className='kpi-value '+(allOk?'ok':'fail');
+  bar.style.display='flex'; bar.classList.add('visible');
 }
 
 /* ============================================================
@@ -2137,6 +2361,24 @@ function renderM34(){
       </details>
       ${diagM34()}
       <div class="info" style="${modeColor}">${modeText}</div>
+      ${(()=>{
+        const sc=footings.filter(f=>results[f.id]).map(f=>{
+          const m=results[f.id].mey;
+          const fs=m.q_app>0?m.qu/m.q_app:0;
+          const S=results[f.id].S_total;
+          const fsOk=fs>=FS,sOk=S<=25;
+          const st=fsOk&&sOk?'ok-cell':(!fsOk?'fail-cell':'warn-cell');
+          const badge=fsOk&&sOk?'ok':'fail';
+          return `<div class="sc-cell ${st}">
+            <div class="sc-badge ${badge}">${fsOk&&sOk?'✅ OK':'❌ FALLA'}</div>
+            <div class="sc-name">${f.name} · ${n(f.B,1)}×${n(f.L,1)} m</div>
+            <div class="sc-row"><span class="sc-key">FS</span><span class="sc-val ${fsOk?'ok':'fail'}">${n(fs,2)}</span></div>
+            <div class="sc-row"><span class="sc-key">S total</span><span class="sc-val ${sOk?'ok':'fail'}">${n(S,1)} mm</span></div>
+            <div class="sc-row"><span class="sc-key">qu</span><span class="sc-val">${n(m.qu,0)} kPa</span></div>
+          </div>`;
+        }).join('');
+        return sc?`<div class="scorecard">${sc}</div>`:'';
+      })()}
       ${inner}
     </div>`:'<div class="empty-state">Sin resultados.</div>';
   document.getElementById('res-m34').innerHTML=html;
@@ -2566,7 +2808,7 @@ function drawBoussinesqChart(){
   charts.bous=new Chart(cv,{type:'line',data:{datasets},options:{
     responsive:true,maintainAspectRatio:false,
     scales:{x:{title:{display:true,text:'Δσz (kPa)'},min:0},y:{title:{display:true,text:'Profundidad (m)'},reverse:true}},
-    plugins:{legend:{position:'bottom'},tooltip:{mode:'nearest',intersect:true,callbacks:{title:items=>items[0]?.dataset?.label||'',label:item=>`Profundidad: ${n(item.parsed.y,2)} m  |  Δσz = ${n(item.parsed.x,1)} kPa`}}},animation:false
+    plugins:{legend:{position:'bottom'},tooltip:{mode:'nearest',intersect:true,callbacks:{title:items=>items[0]?.dataset?.label||'',label:item=>`Profundidad: ${n(item.parsed.y,2)} m  |  Δσz = ${n(item.parsed.x,1)} kPa`}}},animation:{duration:550,easing:'easeOutQuart'}
   },plugins:[bousRef10Plugin]});
 }
 
@@ -2580,7 +2822,7 @@ function drawSettlementsChart(){
     {label:'Sc consolid.',data:footings.map(f=>results[f.id]?.S_coh_c||0),backgroundColor:'#6366f1'}
   ]},options:{
     scales:{x:{stacked:true},y:{stacked:true,title:{display:true,text:'Asentamiento (mm)'}}},
-    plugins:{legend:{position:'bottom'},tooltip:{mode:'index',intersect:false,callbacks:{afterBody:items=>{const f=footings[items[0]?.dataIndex];const R=results[f?.id];if(!R)return[];return['─────────────',`S_total = ${n(R.S_total,2)} mm`,R.S_total<=25?'✔ ≤ 25 mm (NSR-10 H.4)':'✘ > 25 mm (NSR-10 H.4)'];}}}},animation:false
+    plugins:{legend:{position:'bottom'},tooltip:{mode:'index',intersect:false,callbacks:{afterBody:items=>{const f=footings[items[0]?.dataIndex];const R=results[f?.id];if(!R)return[];return['─────────────',`S_total = ${n(R.S_total,2)} mm`,R.S_total<=25?'✔ ≤ 25 mm (NSR-10 H.4)':'✘ > 25 mm (NSR-10 H.4)'];}}}},animation:{duration:550,easing:'easeOutQuart'}
   }});
 }
 
@@ -2737,7 +2979,7 @@ function drawCapacityCharts(){
   const QAdm=valid.map(f=>{const m=results[f.id].mey;const A=f.type==='corrida'?f.B:f.B*f.L;return +(m.qadm_net*A).toFixed(1);});
   const QApp=valid.map(f=>+f.Q.toFixed(1));
   const mkOpts=(yLabel,unit)=>({
-    responsive:true,maintainAspectRatio:false,animation:false,
+    responsive:true,maintainAspectRatio:false,animation:{duration:550,easing:'easeOutQuart'},
     scales:{x:{grid:{display:false},ticks:{font:{size:11}}},y:{beginAtZero:true,title:{display:true,text:yLabel},grid:{color:'#e2e8f0'}}},
     plugins:{
       legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}},
@@ -2987,7 +3229,7 @@ function renderM10(){
       <tr><td>No. Informe</td><td>${pi.informe||'—'} &nbsp;|&nbsp; Fecha: ${today}</td></tr>
       <tr><td>Parámetros</td><td>FS = ${FS} &nbsp;|&nbsp; Modo sondeos: ${modeText}</td></tr>
     </table>
-    <div style="font-size:.71rem;color:var(--g500);margin-top:.65rem">STRATEX v1.0 · Universidad de Ibagué · Facultad de Ingeniería Civil · 2026A<br>Meyerhof (1963) · Boussinesq · Schmertmann-Hartman (1978) · Giroud (1968) · Terzaghi · NSR-10 H.4</div>
+    <div style="font-size:.71rem;color:var(--g500);margin-top:.65rem">STRATEX · Software de Análisis Geotécnico · Universidad de Ibagué · Facultad de Ingeniería Civil<br>Meyerhof (1963) · Boussinesq · Schmertmann-Hartman (1978) · Giroud (1968) · Terzaghi · NSR-10 H.4</div>
   </div>
 
   <div class="rpt-section">
@@ -3190,7 +3432,7 @@ function renderM10(){
   </div>
 
   <div class="rpt-footer">
-    Generado con <strong>STRATEX v1.0</strong> · Universidad de Ibagué · Facultad de Ingeniería Civil · Semestre 2026A<br>
+    Generado con <strong>STRATEX</strong> · Software de Análisis Geotécnico · Universidad de Ibagué · Facultad de Ingeniería Civil<br>
     <em>Este reporte es generado automáticamente como apoyo al análisis de ingeniería. Los resultados deben ser verificados por un ingeniero geotécnico responsable antes de su aplicación en obra.</em>
   </div>
   </div>`;
@@ -4076,44 +4318,42 @@ function newProjectSb(){
 function loadDemoSb(){loadDemo();closeSidebar();}
 function startVerification(){
   const acc=document.getElementById('sb-verif-acc');
-  document.getElementById('sb-design-acc').classList.remove('open');
+  const design=document.getElementById('sb-design-acc');
+  design.classList.remove('open');
   const opening=!acc.classList.contains('open');
   acc.classList.toggle('open');
   if(opening && _currentMode!=='verif'){
-    // Guard: if design mode was already started, ask first
     if(_modeStarted==='design'){
-      acc.classList.remove('open');
-      document.getElementById('sb-design-acc').classList.add('open');
-      showSwitchModal('verif','Diseño','Verificación');
-      return;
+      acc.classList.remove('open'); design.classList.add('open');
+      showSwitchModal('verif','Diseño','Verificación'); return;
     }
     _currentMode='verif';
     document.querySelectorAll('.content>.panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('panel-welcome-verif').classList.add('active');
-    acc.classList.add('on');
-    document.getElementById('sb-design-acc').classList.remove('on');
+    acc.classList.add('on'); design.classList.remove('on');
     const bar=document.getElementById('module-nav');if(bar)bar.style.display='none';
+    // Expand superficiales by default
+    document.getElementById('sb-sup-verif')?.classList.add('open');
   }
 }
 function startDesignMode(){
   const acc=document.getElementById('sb-design-acc');
-  document.getElementById('sb-verif-acc').classList.remove('open');
+  const verif=document.getElementById('sb-verif-acc');
+  verif.classList.remove('open');
   const opening=!acc.classList.contains('open');
   acc.classList.toggle('open');
   if(opening && _currentMode!=='design'){
-    // Guard: if verif mode was already started, ask first
     if(_modeStarted==='verif'){
-      acc.classList.remove('open');
-      document.getElementById('sb-verif-acc').classList.add('open');
-      showSwitchModal('design','Verificación','Diseño');
-      return;
+      acc.classList.remove('open'); verif.classList.add('open');
+      showSwitchModal('design','Verificación','Diseño'); return;
     }
     _currentMode='design';
     document.querySelectorAll('.content>.panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('panel-welcome-design').classList.add('active');
-    acc.classList.add('on');
-    document.getElementById('sb-verif-acc').classList.remove('on');
+    acc.classList.add('on'); verif.classList.remove('on');
     const bar=document.getElementById('module-nav');if(bar)bar.style.display='none';
+    // Expand superficiales by default
+    document.getElementById('sb-sup-design')?.classList.add('open');
   }
 }
 function showDesignPanel(){
@@ -4305,6 +4545,94 @@ function toggleDesDetail(i){
 }
 
 showStartModal();
+
+/* ── Autosave a localStorage cada 45 segundos ── */
+(function(){
+  const KEY='stratex_autosave';
+  function doSave(){
+    if(!footings.length&&!boreholes.length) return;
+    try{
+      localStorage.setItem(KEY,JSON.stringify({footings,boreholes,projectInfo,_ftgId,_bhId,_stratId,ts:Date.now()}));
+    }catch(e){}
+  }
+  setInterval(doSave,45000);
+  // Restaurar si existe autosave reciente (< 2 horas)
+  try{
+    const raw=localStorage.getItem(KEY);
+    if(raw){
+      const d=JSON.parse(raw);
+      if(d.ts&&Date.now()-d.ts<7200000&&(d.footings?.length||d.boreholes?.length)){
+        // Mostrar aviso de restauración
+        setTimeout(()=>{
+          const bar=document.createElement('div');
+          bar.style.cssText='position:fixed;bottom:64px;left:50%;transform:translateX(-50%);z-index:9999;background:#0d1829;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:.6rem 1.1rem;font-size:.78rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 24px rgba(0,0,0,.4)';
+          bar.innerHTML=`<span>💾 Hay un proyecto guardado automáticamente</span><button onclick="restoreAutosave(this.closest('div'))" style="background:var(--mid);color:#fff;border:none;border-radius:6px;padding:.25rem .65rem;cursor:pointer;font-size:.75rem;font-weight:700">Restaurar</button><button onclick="this.closest('div').remove()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1rem">✕</button>`;
+          document.body.appendChild(bar);
+          setTimeout(()=>bar.remove(),8000);
+        },1200);
+        window._autosaveData=d;
+      }
+    }
+  }catch(e){}
+  window.restoreAutosave=function(el){
+    el.remove();
+    const d=window._autosaveData;if(!d)return;
+    footings=d.footings||[];boreholes=d.boreholes||[];projectInfo=d.projectInfo||projectInfo;
+    _ftgId=d._ftgId||footings.length;_bhId=d._bhId||boreholes.length;_stratId=d._stratId||0;
+    document.getElementById('rpt-proyecto').value=projectInfo.proyecto||'';
+    document.getElementById('rpt-propietario').value=projectInfo.propietario||'';
+    document.getElementById('rpt-lugar').value=projectInfo.lugar||'';
+    document.getElementById('rpt-ingeniero').value=projectInfo.ingeniero||'';
+    renderFootings();renderBoreholes();updateAssignModeInfo();closeStartModal();
+  };
+})();
+
+/* ── Live M1 plan — debounced 200ms ── */
+(function(){
+  let _t;
+  const _orig=window.updF;
+  window.updF=function(id,k,v){
+    _orig(id,k,v);
+    clearTimeout(_t);
+    _t=setTimeout(()=>{ if(document.getElementById('panel-m1')?.classList.contains('active')) drawM1Plan(); },200);
+  };
+})();
+
+/* ── Animación de números en resultados ── */
+window.animateNum=function(el,target,decimals=2,duration=700){
+  if(!el||isNaN(target)) return;
+  const start=parseFloat(el.textContent)||0;
+  const s=Date.now();
+  (function tick(){
+    const p=Math.min((Date.now()-s)/duration,1);
+    const e=1-Math.pow(1-p,3); // ease-out cubic
+    el.textContent=(start+(target-start)*e).toFixed(decimals);
+    if(p<1) requestAnimationFrame(tick);
+  })();
+};
+
+/* ── Keyboard shortcuts ── */
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT') return;
+  if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();calcAll();}
+  if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();saveProject();}
+  if(e.key==='Escape'){closeSidebar();document.querySelector('.modal-overlay:not([style*="none"])')?.querySelector('[onclick*="close"]')?.click();}
+  if((e.ctrlKey||e.metaKey)&&e.key==='\\'){e.preventDefault();toggleSidebar();}
+});
+
+/* ── Chart.js animations ON ── */
+(function(){
+  // Patch destroyChart to allow animation re-enable
+  const _orig=window.drawBoussinesqChart;
+  // Override animation:{duration:550,easing:'easeOutQuart'} → true in all future chart creations
+  const _ChartOrig=Chart;
+  // We patch the options when creating charts — add global defaults
+  try{
+    Chart.defaults.animation={duration:600,easing:'easeOutQuart'};
+    Chart.defaults.animations={numbers:{type:'number',properties:['x','y','width','height','top','right','bottom','left','r']}};
+  }catch(e){}
+})();
+
 </script>
 
 <!-- ========== MODULE NAV BAR ========== -->
